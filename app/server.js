@@ -1,13 +1,14 @@
 import path from 'path'
 import express from 'express'
+import config from '../config'
 
 const app = express()
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
-app.listen(3000, 'localhost', () => {
-  console.log('App listening on http://localhost:3000')
+app.listen(config.port, config.host, () => {
+  console.log(`App listening on http://${config.host}:${config.port}`)
 })
