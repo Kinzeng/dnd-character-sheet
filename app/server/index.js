@@ -2,16 +2,25 @@ import './db'
 
 import path from 'path'
 import express from 'express'
-import routes from './routes'
+import morgan from 'morgan'
+import bodyParser from 'body-parser'
+import api from './api'
 import config from '../../config'
 
 const app = express()
+app.use(bodyParser.json())
+app.use(morgan('dev'))
 app.use(express.static(path.join(__dirname, '..', 'public')))
 
-app.use(routes)
+app.use('/api', api)
 
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'))
+})
+
+app.use((err, req, res, next) => {
+  console.log('error', err)
+  res.status(500).send(err)
 })
 
 app.listen(config.port, config.host, () => {

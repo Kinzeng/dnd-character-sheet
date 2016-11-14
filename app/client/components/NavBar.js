@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from './Button'
 
 const containerProps = {
   style: {
@@ -35,7 +36,7 @@ export default class ComponentName extends React.Component {
           <a href='/dashboard.html'>Character List</a>
           <a href='/settings.html'>Settings</a>
         </div>
-        <button>+ New Character</button>
+        <Button onClick={this.props.openModal}>+ New Character</Button>
       </div>
     )
   }

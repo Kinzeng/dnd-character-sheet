@@ -15,6 +15,7 @@ router.post('/characters', async (req, res, next) => {
   try {
     const character = new Character({name})
     await character.save()
+    res.send(character)
   } catch (e) {
     next(e)
   }

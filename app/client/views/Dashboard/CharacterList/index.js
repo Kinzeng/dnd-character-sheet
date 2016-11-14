@@ -22,8 +22,12 @@ export default class CharacterList extends React.Component {
     this.state = {characters: []}
   }
 
-  async componentDidMount () {
-    this.setState({characters: await get(`/characters?username=${this.props.username}`)})
+  componentDidMount () {
+    this.loadCharacters()
+  }
+
+  async loadCharacters () {
+    this.setState({characters: await get(`/api/characters?username=${this.props.username}`)})
   }
 
   render () {
