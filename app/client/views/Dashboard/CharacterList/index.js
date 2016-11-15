@@ -1,13 +1,14 @@
 import React from 'react'
 import Character from './Character'
-import {get} from '../../../utils'
 
 const containerProps = {
   style: {
-    flexGrow: 1,
+    flex: '1 1 auto',
+    height: '0px',
     border: '1px solid black',
     borderWidth: '1px 0',
     backgroundColor: 'rgb(9, 64, 74)',
+    overflow: 'scroll',
 
     display: 'flex',
     flexFlow: 'column nowrap',
@@ -17,21 +18,8 @@ const containerProps = {
 }
 
 export default class CharacterList extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {characters: []}
-  }
-
-  componentDidMount () {
-    this.loadCharacters()
-  }
-
-  async loadCharacters () {
-    this.setState({characters: await get(`/api/characters?username=${this.props.username}`)})
-  }
-
   render () {
-    const characters = this.state.characters.map((character, i) =>
+    const characters = this.props.characters.map((character, i) =>
       <Character key={i} name={character.name} />
     )
 

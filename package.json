@@ -8,7 +8,7 @@
     "babel-node": "babel-node --presets=es2015,react,stage-0 --ignore node_modules",
     "monitor": "nodemon --ignore app/public/ --ignore app/client/ --exec npm run babel-node -- app/server",
     "dev": "webpack -d --watch --progress & npm run monitor",
-    "start": "babel-node app/server.js"
+    "start": "NODE_ENV=production webpack -p && NODE_ENV=production babel-node app/server/index.js"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
