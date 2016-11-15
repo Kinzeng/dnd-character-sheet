@@ -4,7 +4,6 @@ import Character from './Character'
 const containerProps = {
   style: {
     flex: '1 1 auto',
-    height: '0px',
     border: '1px solid black',
     borderWidth: '1px 0',
     backgroundColor: 'rgb(9, 64, 74)',
