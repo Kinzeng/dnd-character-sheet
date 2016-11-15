@@ -33,8 +33,8 @@ export default class ComponentName extends React.Component {
     return (
       <div {...containerProps}>
         <div {...navProps}>
-          <a href='/dashboard.html'>Character List</a>
-          <a href='/settings.html'>Settings</a>
+          <a href='/'>Character List</a>
+          <a href='/settings'>Settings</a>
         </div>
         <Button onClick={this.props.openModal}>+ New Character</Button>
       </div>

@@ -27,6 +27,7 @@ export default class Form extends React.Component {
   async submitForm () {
     const request = methods[this.props.method]
     const res = await request(this.props.action, this.state)
+    this.state = {}
     this.props.afterSubmit(res)
   }
 
