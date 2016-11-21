@@ -2,6 +2,7 @@ import React from 'react'
 
 const appProps = {
   style: {
+    flex: '1 1 auto',
     height: '100%', // Firefox
     minHeight: '100%', // Safari
     width: '100%',

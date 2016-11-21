@@ -1,19 +1,22 @@
 import React from 'react'
 import Character from './Character'
 
-const containerProps = {
-  style: {
-    flex: '1 1 auto',
-    border: '1px solid black',
-    borderWidth: '1px 0',
-    backgroundColor: 'rgb(9, 64, 74)',
-    overflow: 'scroll',
+const containerStyle = {
+  flex: '1 1 auto',
+  border: '1px solid black',
+  borderWidth: '1px 0',
+  backgroundColor: 'rgb(9, 64, 74)',
+  overflow: 'hidden',
 
-    display: 'flex',
-    flexFlow: 'column nowrap',
-    justifyContent: 'flex-start',
-    alignItems: 'stretch'
-  }
+  display: 'flex',
+  flexFlow: 'row nowrap',
+  justifyContent: 'flex-start',
+  alignItems: 'stretch'
+}
+
+const listStyle = {
+  flex: '1 1 auto',
+  overflow: 'scroll'
 }
 
 export default class CharacterList extends React.Component {
@@ -23,8 +26,10 @@ export default class CharacterList extends React.Component {
     )
 
     return (
-      <div {...containerProps}>
-        {characters}
+      <div style={containerStyle}>
+        <div style={listStyle}>
+          {characters}
+        </div>
       </div>
     )
   }

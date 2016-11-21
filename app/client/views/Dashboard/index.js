@@ -7,7 +7,16 @@ import CharacterList from './CharacterList'
 import {get} from '../../utils'
 import {test} from '../../redux/actions/user'
 
+const containerStyle = {
+  flex: '1 1 auto',
+
+  display: 'flex',
+  flexFlow: 'column nowrap'
+}
+
 const mainStyle = {
+  flex: '1 1 auto',
+
   display: 'flex',
   flexFlow: 'column nowrap',
   overflow: 'hidden'
@@ -42,7 +51,7 @@ class Dashboard extends React.Component {
     }
 
     return (
-      <div>
+      <div style={containerStyle}>
         <h1>DnD Character Management</h1>
         <div style={mainStyle}>
           <h2>Characters</h2>
