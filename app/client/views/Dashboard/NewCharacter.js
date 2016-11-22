@@ -1,9 +1,8 @@
 import React from 'react'
-import {withRouter} from 'react-router'
 import Modal from '../../components/Modal'
 import Form, {FormInput} from '../../components/Form'
 
-class NewCharacter extends React.Component {
+export default class NewCharacter extends React.Component {
   render () {
     const modalProps = {
       open: this.props.open,
@@ -26,5 +25,3 @@ class NewCharacter extends React.Component {
     )
   }
 }
-
-export default withRouter(NewCharacter)

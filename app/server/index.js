@@ -1,18 +1,23 @@
 import './db'
 
 import path from 'path'
+
+import bodyParser from 'body-parser'
 import express from 'express'
 import morgan from 'morgan'
-import bodyParser from 'body-parser'
+
 import api from './api'
+import auth, {authenticate} from './auth'
 import config from '../../config'
 
 const app = express()
+// app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(morgan('dev'))
 app.use(express.static(path.join(__dirname, '..', 'public')))
 
-app.use('/api', api)
+app.use('/auth', auth)
+app.use('/api', authenticate(config.jwt), api)
 
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'))

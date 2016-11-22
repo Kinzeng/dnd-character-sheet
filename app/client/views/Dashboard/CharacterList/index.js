@@ -1,5 +1,5 @@
 import React from 'react'
-import Character from './Character'
+import CharacterListItem from './CharacterListItem'
 
 const containerStyle = {
   flex: '1 1 auto',
@@ -22,7 +22,7 @@ const listStyle = {
 export default class CharacterList extends React.Component {
   render () {
     const characters = this.props.characters.map((character, i) =>
-      <Character key={i} name={character.name} />
+      <CharacterListItem key={i} name={character.name} />
     )
 
     return (
@@ -34,5 +34,3 @@ export default class CharacterList extends React.Component {
     )
   }
 }
-
-export Character from './Character'

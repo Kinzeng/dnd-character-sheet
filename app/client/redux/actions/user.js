@@ -1,7 +1,9 @@
-import {TEST} from '../reducers/user'
+import {LOGIN} from '../reducers/user'
+import {post} from '../../utils'
 
-export function test (test) {
+export function login (username, password) {
   return async (dispatch, getState) => {
-    await dispatch({type: TEST, test})
+    const user = await post('/api/users', {username, password})
+    await dispatch({type: LOGIN, user})
   }
 }

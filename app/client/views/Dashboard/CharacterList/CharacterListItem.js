@@ -15,7 +15,7 @@ const containerProps = {
   }
 }
 
-export default class Character extends React.Component {
+export default class CharacterListItem extends React.Component {
   render () {
     return (
       <div {...containerProps}>

@@ -1,6 +1,7 @@
 import React from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router'
 import NavBar from '../../components/NavBar'
 import NewCharacter from './NewCharacter'
 import CharacterList from './CharacterList'
@@ -44,6 +45,10 @@ class Dashboard extends React.Component {
   }
 
   render () {
+    if (!this.props.user.id) {
+      return <Login />
+    }
+
     const newCharacterProps = {
       open: this.state.open,
       closeModal: this.modal.bind(this, false),
@@ -76,4 +81,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard))

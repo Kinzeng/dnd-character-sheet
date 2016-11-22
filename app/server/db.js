@@ -34,7 +34,8 @@ const Character = new mongoose.Schema({
 
 const User = new mongoose.Schema({
   username: String,
-  password: String
+  password: String,
+  token: String
 })
 
 mongoose.model('Character', Character)
