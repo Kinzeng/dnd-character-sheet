@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import NavBar from '../../components/NavBar'
-import NewCharacter from './NewCharacter'
+import NewCharacterModal from './NewCharacterModal'
 import CharacterList from './CharacterList'
 import {get} from '../../utils'
 
@@ -71,7 +71,7 @@ class Dashboard extends React.Component {
         <div style={mainStyle}>
           <h2>Characters</h2>
           <NavBar openModal={this.modal.bind(this, true)} />
-          <NewCharacter {...newCharacterProps} />
+          <NewCharacterModal {...newCharacterProps} />
           <CharacterList characters={this.state.characters} />
         </div>
       </div>

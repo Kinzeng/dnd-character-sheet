@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import Modal from '../../components/Modal'
 import Form, {FormInput} from '../../components/Form'
 
-class NewCharacter extends React.Component {
+class NewCharacterModal extends React.Component {
   render () {
     const modalProps = {
       open: this.props.open,
@@ -34,4 +34,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(NewCharacter)
+export default connect(mapStateToProps)(NewCharacterModal)
