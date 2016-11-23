@@ -1,18 +1,19 @@
 import React from 'react'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
 import {get} from '../../utils'
 
 const containerStyle = {
   display: 'flex'
 }
 
-export default class Character extends React.Component {
+class Character extends React.Component {
   constructor (props) {
     super(props)
     this.state = {character: null}
   }
 
   async componentWillMount () {
-    this.setState({character: await get(`/${this.props.username}/${this.props.params.character}`)})
   }
 
   render () {
@@ -27,3 +28,18 @@ export default class Character extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    character: state.character,
+    token: state.user.token
+  }
+}
+
+const mapDispatchToPrps = (dispatch) => {
+  return {
+
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToPrps)(Character)

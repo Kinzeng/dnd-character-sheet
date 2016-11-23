@@ -1,8 +1,9 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import Modal from '../../components/Modal'
 import Form, {FormInput} from '../../components/Form'
 
-export default class NewCharacter extends React.Component {
+class NewCharacter extends React.Component {
   render () {
     const modalProps = {
       open: this.props.open,
@@ -12,7 +13,8 @@ export default class NewCharacter extends React.Component {
     const formProps = {
       method: 'post',
       action: '/api/characters',
-      afterSubmit: this.props.afterSubmit.bind(this)
+      token: this.props.token,
+      afterSubmit: this.props.afterSubmit
     }
 
     return (
@@ -25,3 +27,11 @@ export default class NewCharacter extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    token: state.user.token
+  }
+}
+
+export default connect(mapStateToProps)(NewCharacter)

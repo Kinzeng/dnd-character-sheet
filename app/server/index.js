@@ -11,13 +11,12 @@ import auth, {authenticate} from './auth'
 import config from '../../config'
 
 const app = express()
-// app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(morgan('dev'))
 app.use(express.static(path.join(__dirname, '..', 'public')))
 
 app.use('/auth', auth)
-app.use('/api', authenticate(config.jwt), api)
+app.use('/api', authenticate(config.jwt.secret), api)
 
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'))

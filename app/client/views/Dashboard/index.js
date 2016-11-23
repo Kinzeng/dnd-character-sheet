@@ -1,12 +1,10 @@
 import React from 'react'
-import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import NavBar from '../../components/NavBar'
 import NewCharacter from './NewCharacter'
 import CharacterList from './CharacterList'
 import {get} from '../../utils'
-import {test} from '../../redux/actions/user'
 
 const containerStyle = {
   flex: '1 1 auto',
@@ -29,8 +27,24 @@ class Dashboard extends React.Component {
     this.state = {open: false, characters: []}
   }
 
-  async componentWillMount () {
-    this.setState({characters: await get(`/api/characters?username=${this.props.username}`)})
+  componentWillMount () {
+    if (this.props.user.id) {
+      this.fetchCharacters()
+    } else {
+      this.props.router.replace('/login')
+    }
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (prevProps.user.id !== this.props.user.id) {
+      this.fetchCharacters()
+    }
+  }
+
+  async fetchCharacters () {
+    this.setState({
+      characters: await get('/api/characters', this.props.user.token)
+    })
   }
 
   modal (open) {
@@ -38,17 +52,13 @@ class Dashboard extends React.Component {
   }
 
   // will redirect to new character later, but for now just show new list
-  afterSubmit (character) {
+  async afterSubmit (character) {
     this.modal(false)
     this.state.characters.push(character)
     this.setState({characters: this.state.characters})
   }
 
   render () {
-    if (!this.props.user.id) {
-      return <Login />
-    }
-
     const newCharacterProps = {
       open: this.state.open,
       closeModal: this.modal.bind(this, false),
@@ -77,7 +87,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    test: bindActionCreators(test, dispatch)
+
   }
 }
 

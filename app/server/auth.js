@@ -11,7 +11,7 @@ export function authenticate (secret) {
   return async function (req, res, next) {
     try {
       const token = jwt.verify(req.header('Authorization'), secret)
-      req.user = await User.findOne({id: token.id})
+      req.user = await User.findOne({_id: token.id})
       next()
     } catch (e) {
       console.log(e)

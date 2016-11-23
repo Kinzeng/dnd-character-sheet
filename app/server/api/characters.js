@@ -6,14 +6,14 @@ const Character = mongoose.model('Character')
 const router = express.Router()
 
 router.get('/characters', async (req, res) => {
-  res.send(await Character.find({}))
+  res.send(await Character.find({owner: req.user.id}))
 })
 
 router.post('/characters', async (req, res, next) => {
   const {name} = req.body
 
   try {
-    const character = new Character({name})
+    const character = new Character({owner: req.user.id, name})
     await character.save()
     res.send(character)
   } catch (e) {
