@@ -68,7 +68,7 @@ router.post('/login', async (req, res) => {
       username: user.username
     })
   } catch (e) {
-    res.status(401).send('Unauthorized')
+    res.status(401).send('Incorrect username or password')
   }
 })
 

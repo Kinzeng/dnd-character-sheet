@@ -14,22 +14,39 @@ const containerStyle = {
   alignItems: 'center'
 }
 
+const errorStyle = {
+  color: 'red'
+}
+
 export default class Form extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
   }
 
+  // called when the input field value is changed
   update (name, e) {
     this.setState({[name]: e.target.value})
   }
 
+  onKeyDown (e) {
+    if (e.keyCode === 13) {
+      this.submitForm()
+    }
+  }
+
   async submitForm () {
-    const request = methods[this.props.method]
-    const res = await request(this.props.action, this.state, this.props.token)
-    this.state = {}
-    if (this.props.afterSubmit) {
-      this.props.afterSubmit(res)
+    try {
+      const request = methods[this.props.method]
+      const res = await request(this.props.action, this.state, this.props.token)
+      this.state = {}
+      if (this.props.afterSubmit) {
+        this.props.afterSubmit(res)
+      }
+    } catch (e) {
+      this.setState({
+        error: (e.response && e.response.text) || this.props.errorMessage || 'Submit Failed'
+      })
     }
   }
 
@@ -37,12 +54,14 @@ export default class Form extends React.Component {
     const fields = React.Children.map(this.props.children, (field, i) => {
       return React.cloneElement(field, {
         update: this.update.bind(this, field.props.name),
-        value: this.state[field.props.name] || ''
+        value: this.state[field.props.name] || '',
+        onKeyDown: this.onKeyDown.bind(this)
       })
     })
 
     return (
       <div style={containerStyle}>
+        <p style={errorStyle}>{this.state.error}</p>
         {fields}
         <Button onClick={this.submitForm.bind(this)}>Submit</Button>
       </div>

@@ -17,6 +17,7 @@ export default class FormInput extends React.Component {
       value: this.props.value,
       placeholder: this.props.name,
       onChange: this.props.update,
+      onKeyDown: this.props.onKeyDown,
       style: inputStyle
     }
 
