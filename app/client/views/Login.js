@@ -16,14 +16,14 @@ const containerStyle = {
 
 class Login extends React.Component {
   componentWillMount () {
-    if (this.props.user.id) {
+    if (this.props.user) {
       this.props.router.push('/dashboard')
     }
   }
 
   login (user) {
     this.props.login(user)
-    this.props.router.push('/dashboard')
+    this.props.router.push(this.props.location.query.next || '/dashboard')
   }
 
   render () {
@@ -51,10 +51,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    login: bindActionCreators(login, dispatch)
-  }
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))
+export default withRouter(connect(mapStateToProps, {login})(Login))

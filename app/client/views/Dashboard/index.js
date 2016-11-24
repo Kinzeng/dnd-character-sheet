@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router'
+import {Link, withRouter} from 'react-router'
 import NavBar from '../../components/NavBar'
 import NewCharacterModal from './NewCharacterModal'
 import {get} from '../../utils'
@@ -27,15 +27,13 @@ class Dashboard extends React.Component {
   }
 
   componentWillMount () {
-    if (this.props.user.id) {
+    if (this.props.user) {
       this.fetchCharacters()
-    } else {
-      this.props.router.replace('/login')
     }
   }
 
   componentDidUpdate (prevProps, prevState) {
-    if (prevProps.user.id !== this.props.user.id) {
+    if (prevProps.user !== this.props.user) {
       this.fetchCharacters()
     }
   }
@@ -70,7 +68,7 @@ class Dashboard extends React.Component {
 
     return (
       <div style={containerStyle}>
-        <h1>DnD Character Management</h1>
+        <Link to='/'><h1>DnD Character Management</h1></Link>
         <div style={mainStyle}>
           <h2>Characters</h2>
           <NavBar openModal={this.modal.bind(this, true)} />

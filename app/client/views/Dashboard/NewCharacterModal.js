@@ -30,7 +30,7 @@ class NewCharacterModal extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    token: state.user.token
+    token: state.user && state.user.token
   }
 }
 

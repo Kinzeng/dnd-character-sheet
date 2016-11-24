@@ -17,6 +17,7 @@ class Character extends React.Component {
   }
 
   render () {
+    console.log('render character')
     if (!this.state.character) {
       return <div />
     }
@@ -32,7 +33,7 @@ class Character extends React.Component {
 const mapStateToProps = (state) => {
   return {
     character: state.character,
-    token: state.user.token
+    token: state.user && state.user.token
   }
 }
 

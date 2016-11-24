@@ -17,7 +17,7 @@ class Home extends React.Component {
     return (
       <div style={containerStyle}>
         <h1>Welcome to DnD Character Management!</h1>
-        {this.props.user.id
+        {this.props.user
           ? <Link to='/dashboard'>Dashboard</Link>
           : <Link to='/login'>Login</Link>
         }

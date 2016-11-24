@@ -61,7 +61,9 @@ export default class Form extends React.Component {
 
     return (
       <div style={containerStyle}>
-        <p style={errorStyle}>{this.state.error}</p>
+        {this.state.error &&
+          <p style={errorStyle}>{this.state.error}</p>
+        }
         {fields}
         <Button onClick={this.submitForm.bind(this)}>Submit</Button>
       </div>
