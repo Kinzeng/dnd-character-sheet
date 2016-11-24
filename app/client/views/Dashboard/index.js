@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import NavBar from '../../components/NavBar'
 import NewCharacterModal from './NewCharacterModal'
-import CharacterList from './CharacterList'
 import {get} from '../../utils'
 
 const containerStyle = {
@@ -65,6 +64,10 @@ class Dashboard extends React.Component {
       afterSubmit: this.afterSubmit.bind(this)
     }
 
+    const view = React.cloneElement(this.props.children, {
+      characters: this.state.characters
+    })
+
     return (
       <div style={containerStyle}>
         <h1>DnD Character Management</h1>
@@ -72,7 +75,7 @@ class Dashboard extends React.Component {
           <h2>Characters</h2>
           <NavBar openModal={this.modal.bind(this, true)} />
           <NewCharacterModal {...newCharacterProps} />
-          <CharacterList characters={this.state.characters} />
+          {view}
         </div>
       </div>
     )
@@ -92,3 +95,5 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard))
+export CharacterList from './CharacterList'
+export Settings from './Settings'

@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router'
 import Button from './Button'
 
 const containerProps = {
@@ -23,7 +24,7 @@ const navProps = {
   }
 }
 
-export default class ComponentName extends React.Component {
+export default class NovBar extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
@@ -33,8 +34,8 @@ export default class ComponentName extends React.Component {
     return (
       <div {...containerProps}>
         <div {...navProps}>
-          <a href='/'>Character List</a>
-          <a href='/settings'>Settings</a>
+          <Link to='/dashboard'>Character List</Link>
+          <Link to='/dashboard/settings'>Settings</Link>
         </div>
         <Button onClick={this.props.openModal}>+ New Character</Button>
       </div>
