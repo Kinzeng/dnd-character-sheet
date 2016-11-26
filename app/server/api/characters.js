@@ -9,7 +9,7 @@ router.get('/characters', async (req, res) => {
   res.send(await Character.find({owner: req.user.id}))
 })
 
-router.post('/characters', async (req, res, next) => {
+router.post('/characters', async (req, res) => {
   const {name} = req.body
 
   const duplicate = await Character.findOne({owner: req.user.id, name})
@@ -19,6 +19,17 @@ router.post('/characters', async (req, res, next) => {
     const character = new Character({owner: req.user.id, name})
     await character.save()
     res.send(character)
+  }
+})
+
+router.put('/characters', async (req, res) => {
+  let character = req.body
+
+  try {
+    await Character.findByIdAndUpdate(character._id, character)
+    res.send(character)
+  } catch (e) {
+    res.status(400).send('Character update failed')
   }
 })
 

@@ -18,7 +18,7 @@ export default (
         <Route path='settings' component={Settings} />
       </Route>
       <Route path='login' component={Login} />
-      <Route path='*' component={auth(Character)} />
+      <Route path=':character' component={auth(Character)} />
     </Route>
   </Router>
 )

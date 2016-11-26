@@ -1,8 +1,7 @@
 export const SET_CHARACTER = 'SET_CHARACTER'
-export const UPDATE_CHARACTER = 'UPDATE_CHARACTER'
 export const CLEAR_CHARACTER = 'CLEAR_CHARACTER'
 
-const initialState = {}
+const initialState = null
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -10,12 +9,8 @@ export default (state = initialState, action) => {
       return action.character
     }
 
-    case UPDATE_CHARACTER: {
-      return {...state, ...action.character}
-    }
-
     case CLEAR_CHARACTER: {
-      return {}
+      return null
     }
 
     default: {

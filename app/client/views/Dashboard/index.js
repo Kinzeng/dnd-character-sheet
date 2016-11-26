@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link, withRouter} from 'react-router'
+import {Link} from 'react-router'
 import NavBar from '../../components/NavBar'
 import NewCharacterModal from './NewCharacterModal'
 import {get} from '../../utils'
@@ -27,32 +27,22 @@ class Dashboard extends React.Component {
   }
 
   componentWillMount () {
-    if (this.props.user) {
-      this.fetchCharacters()
-    }
-  }
-
-  componentDidUpdate (prevProps, prevState) {
-    if (prevProps.user !== this.props.user) {
-      this.fetchCharacters()
-    }
+    this.fetchCharacters()
   }
 
   async fetchCharacters () {
-    this.setState({
-      characters: await get('/api/characters', this.props.user.token)
-    })
+    this.setState({characters: await get('/api/characters', this.props.user.token)})
   }
 
   modal (open) {
     this.setState({open})
   }
 
-  // will redirect to new character later, but for now just show new list
   async afterSubmit (character) {
-    this.modal(false)
-    this.state.characters.push(character)
-    this.setState({characters: this.state.characters})
+    // this.modal(false)
+    // this.state.characters.push(character)
+    // this.setState({characters: this.state.characters})
+    this.props.router.push(`/${character.name}`)
   }
 
   render () {
@@ -86,12 +76,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-
-  }
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard))
+export default connect(mapStateToProps)(Dashboard)
 export CharacterList from './CharacterList'
 export Settings from './Settings'

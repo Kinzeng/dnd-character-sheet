@@ -16,7 +16,10 @@ const Character = new mongoose.Schema({
     type: String,
     required: true
   },
-  description: String,
+  description: {
+    type: String,
+    default: ''
+  },
   stats: {
     strength: {
       type: Number,
@@ -26,7 +29,7 @@ const Character = new mongoose.Schema({
       type: Number,
       default: 10
     },
-    consitution: {
+    constitution: {
       type: Number,
       default: 10
     },

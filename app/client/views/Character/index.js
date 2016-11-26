@@ -1,30 +1,70 @@
 import React from 'react'
-import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import StatsPanel from './StatsPanel'
 import {get} from '../../utils'
+import * as actions from '../../redux/actions/character'
 
 const containerStyle = {
-  display: 'flex'
+  display: 'flex',
+  flexFlow: 'column nowrap',
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start',
+  overflow: 'scroll'
+}
+
+const characterStyle = {
+  display: 'flex',
+  flexFlow: 'row nowrap',
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start'
 }
 
 class Character extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {character: null}
+    this.state = {character: null, error: null}
   }
 
   async componentWillMount () {
+    const characters = await get('/api/characters', this.props.user.token)
+    let character
+    characters.forEach((char) => {
+      if (char.name === this.props.routeParams.character) {
+        character = char
+        return
+      }
+    })
+
+    console.log(character)
+
+    if (character) {
+      this.props.setCharacter(character)
+    } else {
+      this.setState({error: 'Not Found'})
+    }
   }
 
   render () {
-    console.log('render character')
-    if (!this.state.character) {
+    if (this.state.error) {
+      return <div>404 Not Found</div>
+    }
+
+    if (!this.props.character) {
       return <div />
+    }
+
+    const componentProps = {
+      character: this.props.character,
+      updateCharacter: this.props.updateCharacter,
+      updateStats: this.props.updateStats
     }
 
     return (
       <div style={containerStyle}>
-        {this.state.character}
+        <h2>{this.props.character.name}</h2>
+        <div style={characterStyle}>
+          <StatsPanel {...componentProps} />
+        </div>
       </div>
     )
   }
@@ -37,10 +77,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToPrps = (dispatch) => {
-  return {
-
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToPrps)(Character)
+export default connect(mapStateToProps, actions)(Character)
