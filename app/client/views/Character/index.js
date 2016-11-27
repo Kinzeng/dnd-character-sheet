@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import StatsPanel from './StatsPanel'
+import MiscStatsPanel from './MiscStatsPanel'
 import {get} from '../../utils'
 import * as actions from '../../redux/actions/character'
 
@@ -35,13 +36,15 @@ class Character extends React.Component {
       }
     })
 
-    console.log(character)
-
     if (character) {
       this.props.setCharacter(character)
     } else {
       this.setState({error: 'Not Found'})
     }
+  }
+
+  componentWillUnmount () {
+    this.props.clearCharacter()
   }
 
   render () {
@@ -64,6 +67,7 @@ class Character extends React.Component {
         <h2>{this.props.character.name}</h2>
         <div style={characterStyle}>
           <StatsPanel {...componentProps} />
+          <MiscStatsPanel {...componentProps} />
         </div>
       </div>
     )

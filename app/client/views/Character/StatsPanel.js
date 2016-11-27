@@ -1,5 +1,6 @@
 import React from 'react'
 import StatBox from './StatBox'
+import {getModifier} from '../../utils'
 
 const containerStyle = {
   flex: '1 1 auto',
@@ -10,26 +11,36 @@ const containerStyle = {
   alignItemS: 'center'
 }
 
-export default class StatsPanel extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {}
-  }
+const baseStats = {
+  strength: 'Strength',
+  dexterity: 'Dexterity',
+  constitution: 'Constitution',
+  intelligence: 'Intelligence',
+  wisdom: 'Wisdom',
+  charisma: 'Charisma'
+}
 
+export default class StatsPanel extends React.Component {
   update (stat, value) {
     this.props.updateStats({[stat]: value})
   }
 
   render () {
     const stats = this.props.character.stats
+    const boxes = Object.keys(baseStats).map((stat, i) => {
+      const props = {
+        name: baseStats[stat],
+        value: stats[stat],
+        subtext: getModifier(stats[stat]),
+        update: this.update.bind(this, stat),
+        key: i
+      }
+
+      return <StatBox {...props} />
+    })
     return (
       <div style={containerStyle}>
-        <StatBox name='Strength' value={stats.strength} update={this.update.bind(this, 'strength')} />
-        <StatBox name='Dexterity' value={stats.dexterity} update={this.update.bind(this, 'dexterity')} />
-        <StatBox name='Constitution' value={stats.constitution} update={this.update.bind(this, 'constitution')} />
-        <StatBox name='Intelligence' value={stats.intelligence} update={this.update.bind(this, 'intelligence')} />
-        <StatBox name='Wisdom' value={stats.wisdom} update={this.update.bind(this, 'wisdom')} />
-        <StatBox name='Charisma' value={stats.charisma} update={this.update.bind(this, 'charisma')} />
+        {boxes}
       </div>
     )
   }

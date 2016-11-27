@@ -55,7 +55,7 @@ const Character = new mongoose.Schema({
     },
     proficiencyBonus: {
       type: Number,
-      default: 10
+      default: 2
     }
   },
   proficiencies: [Number],
