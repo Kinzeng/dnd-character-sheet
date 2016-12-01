@@ -130,7 +130,7 @@ export default class StatBox extends React.Component {
     if (this.props.subtext) {
       subtext = this.props.updateSubtext
         ? <input {...subtextInputProps} />
-        : <div style={subtextStyle}>{this.state.subtext}</div>
+        : <div style={subtextStyle}>{this.props.subtext}</div>
     }
 
     return (

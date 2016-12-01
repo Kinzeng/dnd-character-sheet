@@ -20,7 +20,10 @@ const checkedStyle = {
 export default class Checkbox extends React.Component {
   render () {
     const containerProps = {
-      style: containerStyle,
+      style: {
+        ...containerStyle,
+        ...this.props.style
+      },
       onClick: this.props.onClick
     }
 

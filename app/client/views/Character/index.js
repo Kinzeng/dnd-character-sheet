@@ -1,13 +1,16 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import StatsPanel from './StatsPanel'
+import CharacterHeader from './CharacterHeader'
+import DeathSaves from './DeathSaves'
 import MiscStatsPanel from './MiscStatsPanel'
 import ProficiencyPanel from './ProficiencyPanel'
+import StatsPanel from './StatsPanel'
 import {get} from '../../utils'
 import * as actions from '../../redux/actions/character'
 
 const containerStyle = {
   display: 'flex',
+  padding: '0 1em',
   flexFlow: 'column nowrap',
   justifyContent: 'flex-start',
   alignItems: 'stretch',
@@ -65,20 +68,23 @@ class Character extends React.Component {
       return <div />
     }
 
+    const {character} = this.props
     const componentProps = {
-      character: this.props.character,
+      character,
       updateCharacter: this.props.updateCharacter,
       updateStats: this.props.updateStats,
-      toggleProficiency: this.props.toggleProficiency
+      toggleProficiency: this.props.toggleProficiency,
+      toggleSave: this.props.toggleSave
     }
 
     return (
       <div style={containerStyle}>
-        <h2>{this.props.character.name}</h2>
+        <CharacterHeader {...componentProps} />
         <div style={characterStyle}>
           <StatsPanel {...componentProps} />
           <div style={columnStyle}>
             <MiscStatsPanel {...componentProps} />
+            <DeathSaves {...componentProps} />
             <ProficiencyPanel {...componentProps} />
           </div>
         </div>

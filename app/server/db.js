@@ -20,6 +20,23 @@ const Character = new mongoose.Schema({
     type: String,
     default: ''
   },
+  level: {
+    type: Number,
+    default: 1
+  },
+  class: String,
+  race: String,
+  alignment: String,
+  deathSaves: {
+    successes: {
+      type: [Boolean],
+      default: [false, false, false]
+    },
+    failures: {
+      type: [Boolean],
+      default: [false, false, false]
+    }
+  },
   stats: {
     strength: {
       type: Number,

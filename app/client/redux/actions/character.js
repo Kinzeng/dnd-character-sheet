@@ -47,6 +47,23 @@ export function toggleProficiency (skill) {
   }
 }
 
+export function toggleSave (type, i) {
+  return async (dispatch, getState) => {
+    const state = getState()
+    const saves = state.character.deathSaves[type]
+    saves[i] = !saves[i]
+    const character = await put('/api/characters', {
+      ...state.character,
+      deathSaves: {
+        ...state.character.deathSaves,
+        [type]: saves
+      }
+    }, state.user.token)
+
+    await dispatch({type: SET_CHARACTER, character})
+  }
+}
+
 export function clearCharacter () {
   return {type: CLEAR_CHARACTER}
 }
