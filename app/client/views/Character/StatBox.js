@@ -57,9 +57,12 @@ const subtextStyle = {
   bottom: '-10px',
   height: '20px',
   width: '45px',
+  fontSize: '1em',
+  textAlign: 'center',
   backgroundColor: 'white',
   border: '1px solid black',
   borderRadius: '10px',
+  outline: 'none',
 
   display: 'flex',
   flexFlow: 'column nowrap',
@@ -70,25 +73,64 @@ const subtextStyle = {
 export default class StatBox extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {stat: props.value}
+    this.state = {
+      statOriginal: props.value,
+      stat: props.value,
+      subtextOriginal: props.subtext,
+      subtext: props.subtext
+    }
+  }
+
+  onBlur (input, update) {
+    const original = `${input}Original`
+    const value = parseInt(this.state[input])
+    if (!value) {
+      this.setState({[input]: this.state[original]})
+    } else {
+      update(this.state[input])
+      this.setState({[original]: value})
+    }
+  }
+
+  onChange (input, e) {
+    if (/^\d*$/.test(e.target.value)) {
+      this.setState({[input]: e.target.value})
+    }
+  }
+
+  onKeyDown (e) {
+    if (e.keyCode === 13) {
+      e.target.blur()
+    }
   }
 
   render () {
-    let inputProps
+    let inputProps, subtextInputProps
     if (this.props.update) {
       inputProps = {
         style: valueStyle,
         value: this.state.stat,
-        onChange: (e) => {
-          this.setState({stat: e.target.value})
-        },
-        onKeyDown: (e) => {
-          if (e.keyCode === 13) {
-            e.target.blur()
-          }
-        },
-        onBlur: this.props.update.bind(null, parseInt(this.state.stat))
+        onChange: this.onChange.bind(this, 'stat'),
+        onKeyDown: this.onKeyDown.bind(this),
+        onBlur: this.onBlur.bind(this, 'stat', this.props.update)
       }
+    }
+
+    if (this.props.updateSubtext) {
+      subtextInputProps = {
+        style: subtextStyle,
+        value: this.state.subtext,
+        onChange: this.onChange.bind(this, 'subtext'),
+        onKeyDown: this.onKeyDown.bind(this),
+        onBlur: this.onBlur.bind(this, 'subtext', this.props.updateSubtext)
+      }
+    }
+
+    let subtext
+    if (this.props.subtext) {
+      subtext = this.props.updateSubtext
+        ? <input {...subtextInputProps} />
+        : <div style={subtextStyle}>{this.state.subtext}</div>
     }
 
     return (
@@ -99,11 +141,7 @@ export default class StatBox extends React.Component {
             ? <input {...inputProps} />
             : <div style={valueStyle}>{this.props.value}</div>
           }
-          {this.props.subtext &&
-            <div style={subtextStyle}>
-              {this.props.subtext}
-            </div>
-          }
+          {subtext}
         </div>
       </div>
     )

@@ -47,7 +47,11 @@ const Character = new mongoose.Schema({
     },
     health: {
       type: Number,
-      default: 10
+      default: 0
+    },
+    maxHealth: {
+      type: Number,
+      default: 0
     },
     ac: {
       type: Number,

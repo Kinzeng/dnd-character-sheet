@@ -20,7 +20,7 @@ export default class MiscStatsPanel extends React.Component {
     const {stats} = this.props.character
     return (
       <div style={containerStyle}>
-        <StatBox name='Health' value={stats.health} subtext={100} />
+        <StatBox name='Health' value={stats.health} update={this.update.bind(this, 'health')} updateSubtext={this.update.bind(this, 'maxHealth')} subtext={stats.maxHealth} />
         <StatBox name='Armor Class' value={stats.ac} update={this.update.bind(this, 'ac')} />
         <StatBox name='Initiative' value={getModifier(stats.dexterity)} />
         <StatBox name='Proficiency' value={stats.proficiencyBonus} update={this.update.bind(this, 'proficiencyBonus')} />
