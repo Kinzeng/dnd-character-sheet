@@ -32,6 +32,21 @@ export function updateStats (stats) {
   }
 }
 
+export function toggleProficiency (skill) {
+  return async (dispatch, getState) => {
+    const state = getState()
+    const character = await put('/api/characters', {
+      ...state.character,
+      proficiencies: {
+        ...state.character.proficiencies,
+        [skill]: !state.character.proficiencies[skill]
+      }
+    }, state.user.token)
+
+    await dispatch({type: SET_CHARACTER, character})
+  }
+}
+
 export function clearCharacter () {
   return {type: CLEAR_CHARACTER}
 }

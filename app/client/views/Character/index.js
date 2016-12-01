@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import StatsPanel from './StatsPanel'
 import MiscStatsPanel from './MiscStatsPanel'
+import ProficiencyPanel from './ProficiencyPanel'
 import {get} from '../../utils'
 import * as actions from '../../redux/actions/character'
 
@@ -9,15 +10,23 @@ const containerStyle = {
   display: 'flex',
   flexFlow: 'column nowrap',
   justifyContent: 'flex-start',
-  alignItems: 'flex-start',
+  alignItems: 'stretch',
   overflow: 'scroll'
 }
 
 const characterStyle = {
+  flex: '1 1 auto',
   display: 'flex',
   flexFlow: 'row nowrap',
   justifyContent: 'flex-start',
   alignItems: 'flex-start'
+}
+
+const columnStyle = {
+  display: 'flex',
+  flexFlow: 'column nowrap',
+  justifyContent: 'flex-start',
+  alignItems: 'center'
 }
 
 class Character extends React.Component {
@@ -59,7 +68,8 @@ class Character extends React.Component {
     const componentProps = {
       character: this.props.character,
       updateCharacter: this.props.updateCharacter,
-      updateStats: this.props.updateStats
+      updateStats: this.props.updateStats,
+      toggleProficiency: this.props.toggleProficiency
     }
 
     return (
@@ -67,7 +77,10 @@ class Character extends React.Component {
         <h2>{this.props.character.name}</h2>
         <div style={characterStyle}>
           <StatsPanel {...componentProps} />
-          <MiscStatsPanel {...componentProps} />
+          <div style={columnStyle}>
+            <MiscStatsPanel {...componentProps} />
+            <ProficiencyPanel {...componentProps} />
+          </div>
         </div>
       </div>
     )

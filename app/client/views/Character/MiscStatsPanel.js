@@ -1,15 +1,14 @@
 import React from 'react'
 import StatBox from './StatBox'
-import {getModifier} from '../../utils'
+import {getModifier, getSkillModifier} from '../../utils'
 
 const containerStyle = {
-  flex: '1 1 auto',
   width: '444px',
 
   display: 'flex',
   flexFlow: 'row wrap',
   justifyContent: 'flex-start',
-  alignItemS: 'flex-start'
+  alignItems: 'flex-start'
 }
 
 export default class MiscStatsPanel extends React.Component {
@@ -18,7 +17,7 @@ export default class MiscStatsPanel extends React.Component {
   }
 
   render () {
-    const stats = this.props.character.stats
+    const {stats} = this.props.character
     return (
       <div style={containerStyle}>
         <StatBox name='Health' value={stats.health} subtext={100} />
@@ -26,7 +25,7 @@ export default class MiscStatsPanel extends React.Component {
         <StatBox name='Initiative' value={getModifier(stats.dexterity)} />
         <StatBox name='Proficiency' value={stats.proficiencyBonus} update={this.update.bind(this, 'proficiencyBonus')} />
         <StatBox name='Speed' value={stats.health} update={this.update.bind(this, 'speed')} />
-        <StatBox name='Perception' value={stats.health} />
+        <StatBox name='Perception' value={parseInt(getSkillModifier('perception', this.props.character)) + 10} />
       </div>
     )
   }

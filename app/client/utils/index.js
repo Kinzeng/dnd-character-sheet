@@ -1,4 +1,5 @@
 import superagent from 'superagent'
+import {abilityModifiers} from '../constants'
 
 export async function get (url, token) {
   return (await superagent
@@ -29,6 +30,20 @@ export async function put (url, data, token) {
 export function getModifier (stat) {
   let modifier = Math.floor((stat - 10) / 2)
 
+  if (modifier >= 0) {
+    modifier = `+${modifier}`
+  }
+
+  return modifier
+}
+
+export function getAbilityModifier (ability, character) {
+  return getModifier(character.stats[ability])
+}
+
+export function getSkillModifier (skill, character) {
+  const proficiencyBonus = character.proficiencies[skill] ? character.stats.proficiencyBonus : 0
+  let modifier = parseInt(getAbilityModifier(abilityModifiers[skill], character)) + proficiencyBonus
   if (modifier >= 0) {
     modifier = `+${modifier}`
   }

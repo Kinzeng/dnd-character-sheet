@@ -7,7 +7,7 @@ const containerStyle = {
   display: 'flex',
   flexFlow: 'column nowrap',
   justifyContent: 'flex-start',
-  alignItemS: 'center'
+  alignItems: 'stretch'
 }
 
 export default (Component) => {

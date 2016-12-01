@@ -8,7 +8,7 @@ const containerStyle = {
   display: 'flex',
   flexFlow: 'column nowrap',
   justifyContent: 'flex-start',
-  alignItemS: 'center'
+  alignItems: 'center'
 }
 
 class Settings extends React.Component {

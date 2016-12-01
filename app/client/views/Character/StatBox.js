@@ -87,7 +87,7 @@ export default class StatBox extends React.Component {
             e.target.blur()
           }
         },
-        onBlur: this.props.update.bind(null, this.state.stat)
+        onBlur: this.props.update.bind(null, parseInt(this.state.stat))
       }
     }
 

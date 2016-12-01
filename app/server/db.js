@@ -58,8 +58,109 @@ const Character = new mongoose.Schema({
       default: 2
     }
   },
-  proficiencies: [Number],
-  inventory: [Object]
+  proficiencies: {
+    strength: {
+      type: Boolean,
+      default: false
+    },
+    dexterity: {
+      type: Boolean,
+      default: false
+    },
+    constitution: {
+      type: Boolean,
+      default: false
+    },
+    intelligence: {
+      type: Boolean,
+      default: false
+    },
+    wisdom: {
+      type: Boolean,
+      default: false
+    },
+    charisma: {
+      type: Boolean,
+      default: false
+    },
+    acrobatics: {
+      type: Boolean,
+      default: false
+    },
+    animalHandling: {
+      type: Boolean,
+      default: false
+    },
+    arcana: {
+      type: Boolean,
+      default: false
+    },
+    athletics: {
+      type: Boolean,
+      default: false
+    },
+    deception: {
+      type: Boolean,
+      default: false
+    },
+    history: {
+      type: Boolean,
+      default: false
+    },
+    insight: {
+      type: Boolean,
+      default: false
+    },
+    intimidation: {
+      type: Boolean,
+      default: false
+    },
+    investigation: {
+      type: Boolean,
+      default: false
+    },
+    nature: {
+      type: Boolean,
+      default: false
+    },
+    medicine: {
+      type: Boolean,
+      default: false
+    },
+    perception: {
+      type: Boolean,
+      default: false
+    },
+    performance: {
+      type: Boolean,
+      default: false
+    },
+    persuasion: {
+      type: Boolean,
+      default: false
+    },
+    religion: {
+      type: Boolean,
+      default: false
+    },
+    sleightOfHand: {
+      type: Boolean,
+      default: false
+    },
+    stealth: {
+      type: Boolean,
+      default: false
+    },
+    survival: {
+      type: Boolean,
+      default: false
+    }
+  },
+  inventory: [{
+    name: String,
+    quantity: Number,
+    weight: Number
+  }]
 })
 
 const User = new mongoose.Schema({

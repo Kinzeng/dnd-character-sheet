@@ -3,12 +3,10 @@ import StatBox from './StatBox'
 import {getModifier} from '../../utils'
 
 const containerStyle = {
-  flex: '1 1 auto',
-
   display: 'flex',
   flexFlow: 'column nowrap',
   justifyContent: 'flex-start',
-  alignItemS: 'center'
+  alignItems: 'center'
 }
 
 const baseStats = {
