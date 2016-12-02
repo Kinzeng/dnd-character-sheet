@@ -8,6 +8,7 @@ import Character from '../views/Character'
 import Dashboard, {CharacterList, Settings} from '../views/Dashboard'
 import Home from '../views/Home'
 import Login from '../views/Login'
+import Register from '../views/Register'
 
 export default (
   <Router history={browserHistory}>
@@ -18,6 +19,7 @@ export default (
         <Route path='settings' component={Settings} />
       </Route>
       <Route path='login' component={Login} />
+      <Route path='register' component={Register} />
       <Route path=':character' component={auth(Character)} />
     </Route>
   </Router>

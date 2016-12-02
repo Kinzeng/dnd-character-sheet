@@ -32,7 +32,11 @@ const router = express.Router()
 
 // registration
 router.post('/register', async (req, res) => {
-  let {username, password} = req.body
+  let {username, password, confirm} = req.body
+  if (password !== confirm) {
+    return res.status(400).send('Passwords do not match')
+  }
+
   try {
     password = bcrypt.hashSync(password, 10)
     const user = new User({username, password})
@@ -45,7 +49,11 @@ router.post('/register', async (req, res) => {
     })
   } catch (e) {
     console.log(e)
-    res.status(500).send('Internal Server Error')
+    if (e.code === 11000) {
+      res.status(400).send('Username already in use')
+    } else {
+      res.status(500).send('Internal Server Error')
+    }
   }
 })
 

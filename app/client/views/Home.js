@@ -12,15 +12,26 @@ const containerStyle = {
   alignItems: 'center'
 }
 
+const navStyle = {
+  width: '125px',
+
+  display: 'flex',
+  flexFlow: 'row nowrap',
+  justifyContent: 'space-around',
+  alignItems: 'center'
+}
+
 class Home extends React.Component {
   render () {
     return (
       <div style={containerStyle}>
         <h1>Welcome to DnD Character Management!</h1>
-        {this.props.user
-          ? <Link to='/dashboard'>Dashboard</Link>
-          : <Link to='/login'>Login</Link>
-        }
+        <div>
+          {this.props.user
+            ? <Link to='/dashboard'>Dashboard</Link>
+            : <div style={navStyle}><Link to='/login'>Login</Link><Link to='/register'>Register</Link></div>
+          }
+        </div>
       </div>
     )
   }

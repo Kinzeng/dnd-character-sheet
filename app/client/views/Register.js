@@ -13,41 +13,30 @@ const containerStyle = {
   alignItems: 'center'
 }
 
-class Login extends React.Component {
-  componentWillMount () {
-    if (this.props.user) {
-      this.props.router.push('/dashboard')
-    }
-  }
-
+class Register extends React.Component {
   login (user) {
     this.props.login(user)
-    this.props.router.push(this.props.location.query.next || '/dashboard')
+    this.props.router.push('/dashboard')
   }
 
   render () {
     const formProps = {
       method: 'post',
-      action: '/auth/login',
+      action: '/auth/register',
       afterSubmit: this.login.bind(this)
     }
 
     return (
       <div style={containerStyle}>
-        <h2>Login</h2>
+        <h2>Register</h2>
         <Form {...formProps}>
           <FormInput type='text' name='username' />
           <FormInput type='password' name='password' />
+          <FormInput type='password' name='confirm' />
         </Form>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
-}
-
-export default withRouter(connect(mapStateToProps, {login})(Login))
+export default withRouter(connect(null, {login})(Register))

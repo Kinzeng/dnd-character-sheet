@@ -185,7 +185,10 @@ const Character = new mongoose.Schema({
 })
 
 const User = new mongoose.Schema({
-  username: String,
+  username: {
+    type: String,
+    unique: true
+  },
   password: String,
   token: String
 })

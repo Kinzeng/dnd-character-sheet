@@ -15,6 +15,7 @@ const containerStyle = {
 }
 
 const errorStyle = {
+  marginTop: 0,
   color: 'red'
 }
 
