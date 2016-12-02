@@ -77,7 +77,7 @@ export default class TextBox extends React.Component {
     let box = input
     if (this.props.title) {
       box = (
-        <div style={containerStyle}>
+        <div style={{...containerStyle, ...this.props.containerStyle}}>
           <div style={titleStyle}>{this.props.title}</div>
           {input}
         </div>

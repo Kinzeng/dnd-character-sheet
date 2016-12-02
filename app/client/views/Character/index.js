@@ -79,6 +79,12 @@ class Character extends React.Component {
     }
 
     const descriptionProps = {
+      style: {
+        minHeight: '200px'
+      },
+      containerStyle: {
+        margin: '0px 10px 30px 10px'
+      },
       type: 'textarea',
       value: character.description,
       title: 'Description',

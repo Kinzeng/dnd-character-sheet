@@ -4,17 +4,24 @@ import Checkbox from '../../components/Checkbox'
 const containerStyle = {
   flex: '1 1 auto',
   marginBottom: '30px',
-  padding: '20px 10px',
-  width: '310px',
+  width: '200px',
   border: '1px solid black',
 
   display: 'flex',
-  flexFlow: 'row nowrap',
+  flexFlow: 'column nowrap',
   justifyContent: 'space-around',
   alignItems: 'center'
 }
 
+const titleStyle = {
+  width: '100%',
+  backgroundColor: 'black',
+  color: 'white',
+  textAlign: 'center'
+}
+
 const savesStyle = {
+  padding: '0.25em',
   display: 'flex',
   flexFlow: 'column nowrap',
   justifyContent: 'flex-start',
@@ -64,7 +71,7 @@ export default class DeathSaves extends React.Component {
 
     return (
       <div style={containerStyle}>
-        <div>Death Saves</div>
+        <div style={titleStyle}>Death Saves</div>
         <div style={savesStyle}>
           <div style={rowStyle}>
             <div style={labelStyle}>Successes</div>
