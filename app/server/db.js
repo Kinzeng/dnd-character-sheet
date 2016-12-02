@@ -64,11 +64,11 @@ const Character = new mongoose.Schema({
     },
     health: {
       type: Number,
-      default: 0
+      default: 10
     },
     maxHealth: {
       type: Number,
-      default: 0
+      default: 10
     },
     ac: {
       type: Number,
