@@ -5,6 +5,7 @@ import DeathSaves from './DeathSaves'
 import MiscStatsPanel from './MiscStatsPanel'
 import ProficiencyPanel from './ProficiencyPanel'
 import StatsPanel from './StatsPanel'
+import TextBox from './TextBox'
 import {get} from '../../utils'
 import * as actions from '../../redux/actions/character'
 
@@ -77,6 +78,15 @@ class Character extends React.Component {
       toggleSave: this.props.toggleSave
     }
 
+    const descriptionProps = {
+      type: 'textarea',
+      value: character.description,
+      title: 'Description',
+      update: (value) => {
+        this.props.updateCharacter({description: value})
+      }
+    }
+
     return (
       <div style={containerStyle}>
         <CharacterHeader {...componentProps} />
@@ -86,6 +96,9 @@ class Character extends React.Component {
             <MiscStatsPanel {...componentProps} />
             <DeathSaves {...componentProps} />
             <ProficiencyPanel {...componentProps} />
+          </div>
+          <div style={columnStyle}>
+            <TextBox {...descriptionProps} />
           </div>
         </div>
       </div>
