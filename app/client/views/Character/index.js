@@ -21,7 +21,7 @@ const containerStyle = {
 
 const characterStyle = {
   display: 'flex',
-  flexFlow: 'row nowrap',
+  flexFlow: 'row wrap',
   justifyContent: 'flex-start',
   alignItems: 'flex-start'
 }
@@ -76,7 +76,8 @@ class Character extends React.Component {
       updateStats: this.props.updateStats,
       toggleProficiency: this.props.toggleProficiency,
       toggleSave: this.props.toggleSave,
-      addItem: this.props.addItem
+      addItem: this.props.addItem,
+      deleteItem: this.props.deleteItem
     }
 
     const descriptionProps = {

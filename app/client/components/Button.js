@@ -3,6 +3,7 @@ import React from 'react'
 const buttonStyle = {
   backgroundColor: 'transparent',
   border: 'none',
+  outline: 'none',
   cursor: 'pointer'
 }
 

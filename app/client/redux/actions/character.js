@@ -79,6 +79,21 @@ export function addItem (item) {
   }
 }
 
+export function deleteItem (index) {
+  return async (dispatch, getState) => {
+    const state = getState()
+    const inventory = state.character.inventory
+    inventory.splice(index, 1)
+
+    const character = await put('/api/characters', {
+      ...state.character,
+      inventory
+    }, state.user.token)
+
+    await dispatch({type: SET_CHARACTER, character})
+  }
+}
+
 export function clearCharacter () {
   return {type: CLEAR_CHARACTER}
 }

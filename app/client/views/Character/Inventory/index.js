@@ -31,6 +31,11 @@ const itemsStyle = {
   alignItems: 'stretch'
 }
 
+const formStyle = {
+  padding: '1em',
+  alignItems: 'stretch'
+}
+
 const inputStyle = {
   width: '100%',
   display: 'flex',
@@ -42,6 +47,12 @@ const inputStyle = {
 const labelStyle = {
   width: '40%',
   textAlign: 'right'
+}
+
+const textareaStyle = {
+  marginTop: '0.5em',
+  marginLeft: '9%',
+  width: '91%'
 }
 
 export default class Inventory extends React.Component {
@@ -57,9 +68,8 @@ export default class Inventory extends React.Component {
     const {character} = this.props
     const items = character.inventory.map((item, i) => {
       const itemProps = {
-        quantity: item.quantity,
-        name: item.name,
-        weight: item.weight,
+        ...item,
+        delete: this.props.deleteItem.bind(null, i),
         key: i
       }
 
@@ -67,9 +77,7 @@ export default class Inventory extends React.Component {
     })
 
     const formProps = {
-      style: {
-        padding: '1em'
-      },
+      style: formStyle,
       onSubmit: this.onSubmit.bind(this)
     }
 
@@ -79,28 +87,31 @@ export default class Inventory extends React.Component {
         <div style={itemsStyle}>
           {items}
         </div>
-        <Form {...formProps}>
-          <div style={inputStyle}>
-            <div style={labelStyle}>Name:</div>
-            <FormInput type='text' name='name' />
-          </div>
-          <div style={inputStyle}>
-            <div style={labelStyle}>Quantity:</div>
-            <FormInput type='number' name='quantity' />
-          </div>
-          <div style={inputStyle}>
-            <div style={labelStyle}>Weight:</div>
-            <FormInput type='number' name='weight' />
-          </div>
-          <div style={inputStyle}>
-            <div style={labelStyle}>Value:</div>
-            <FormInput type='text' name='value' />
-          </div>
-          <div>
-            <div style={labelStyle}>Description:</div>
-            <FormInput type='textarea' name='description' />
-          </div>
-        </Form>
+        <div>
+          <div style={titleStyle}>Add Item</div>
+          <Form {...formProps}>
+            <div style={inputStyle}>
+              <div style={labelStyle}>Name:</div>
+              <FormInput type='text' name='name' />
+            </div>
+            <div style={inputStyle}>
+              <div style={labelStyle}>Quantity:</div>
+              <FormInput type='number' name='quantity' />
+            </div>
+            <div style={inputStyle}>
+              <div style={labelStyle}>Weight:</div>
+              <FormInput type='number' name='weight' />
+            </div>
+            <div style={inputStyle}>
+              <div style={labelStyle}>Value:</div>
+              <FormInput type='text' name='value' />
+            </div>
+            <div>
+              <div style={labelStyle}>Description:</div>
+              <FormInput style={textareaStyle} type='textarea' name='description' />
+            </div>
+          </Form>
+        </div>
       </div>
     )
   }
