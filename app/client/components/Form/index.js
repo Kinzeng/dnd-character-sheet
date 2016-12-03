@@ -38,30 +38,59 @@ export default class Form extends React.Component {
 
   async submitForm () {
     try {
-      const request = methods[this.props.method]
-      const res = await request(this.props.action, this.state, this.props.token)
-      this.state = {}
-      if (this.props.afterSubmit) {
-        this.props.afterSubmit(res)
+      if (this.props.beforeSubmit) {
+        this.props.beforeSubmit(this.state)
       }
+
+      if (this.props.onSubmit) {
+        this.props.onSubmit(this.state)
+      } else {
+        const request = methods[this.props.method]
+        const res = await request(this.props.action, this.state, this.props.token)
+        if (this.props.afterSubmit) {
+          this.props.afterSubmit(res)
+        }
+      }
+
+      this.state = {}
     } catch (e) {
       this.setState({
-        error: (e.response && e.response.text) || this.props.errorMessage || 'Submit Failed'
+        error: (e.response && e.response.text) || e.message || 'Submit Failed'
       })
     }
   }
 
-  render () {
-    const fields = React.Children.map(this.props.children, (field, i) => {
-      return React.cloneElement(field, {
-        update: this.update.bind(this, field.props.name),
-        value: this.state[field.props.name] || '',
-        onKeyDown: this.onKeyDown.bind(this)
-      })
+  recursiveClone (children) {
+    const self = this
+    return React.Children.map(children, (child) => {
+      if (!React.isValidElement(child)) {
+        return child
+      }
+
+      const props = child.type.name === 'FormInput'
+      ? {
+        update: self.update.bind(self, child.props.name),
+        value: self.state[child.props.name] || '',
+        onKeyDown: self.onKeyDown.bind(self)
+      }
+      : {}
+
+      props.children = self.recursiveClone(child.props.children)
+
+      return React.cloneElement(child, props)
     })
+  }
+
+  render () {
+    const style = {
+      ...containerStyle,
+      ...this.props.style
+    }
+
+    const fields = this.recursiveClone(this.props.children)
 
     return (
-      <div style={containerStyle}>
+      <div style={style}>
         {this.state.error &&
           <p style={errorStyle}>{this.state.error}</p>
         }

@@ -178,9 +178,11 @@ const Character = new mongoose.Schema({
     }
   },
   inventory: [{
-    name: String,
     quantity: Number,
-    weight: Number
+    name: String,
+    weight: Number,
+    value: String,
+    description: String
   }]
 })
 

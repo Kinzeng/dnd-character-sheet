@@ -64,6 +64,21 @@ export function toggleSave (type, i) {
   }
 }
 
+export function addItem (item) {
+  return async (dispatch, getState) => {
+    const state = getState()
+    const inventory = state.character.inventory
+    inventory.push(item)
+
+    const character = await put('/api/characters', {
+      ...state.character,
+      inventory
+    }, state.user.token)
+
+    await dispatch({type: SET_CHARACTER, character})
+  }
+}
+
 export function clearCharacter () {
   return {type: CLEAR_CHARACTER}
 }

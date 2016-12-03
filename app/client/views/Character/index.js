@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import CharacterHeader from './CharacterHeader'
 import DeathSaves from './DeathSaves'
+import Inventory from './Inventory'
 import MiscStatsPanel from './MiscStatsPanel'
 import ProficiencyPanel from './ProficiencyPanel'
 import StatsPanel from './StatsPanel'
@@ -19,7 +20,6 @@ const containerStyle = {
 }
 
 const characterStyle = {
-  flex: '1 1 auto',
   display: 'flex',
   flexFlow: 'row nowrap',
   justifyContent: 'flex-start',
@@ -75,7 +75,8 @@ class Character extends React.Component {
       updateCharacter: this.props.updateCharacter,
       updateStats: this.props.updateStats,
       toggleProficiency: this.props.toggleProficiency,
-      toggleSave: this.props.toggleSave
+      toggleSave: this.props.toggleSave,
+      addItem: this.props.addItem
     }
 
     const descriptionProps = {
@@ -105,6 +106,9 @@ class Character extends React.Component {
           </div>
           <div style={columnStyle}>
             <TextBox {...descriptionProps} />
+          </div>
+          <div style={columnStyle}>
+            <Inventory {...componentProps} />
           </div>
         </div>
       </div>
