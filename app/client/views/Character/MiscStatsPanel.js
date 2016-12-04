@@ -19,7 +19,7 @@ class MiscStatsPanel extends React.Component {
   }
 
   render () {
-    const {stats} = this.props.character
+    const {stats, proficiencies} = this.props
     return (
       <div style={containerStyle}>
         <StatBox name='Health' value={stats.health} update={this.update.bind(this, 'health')} updateSubtext={this.update.bind(this, 'maxHealth')} subtext={stats.maxHealth} />
@@ -27,7 +27,7 @@ class MiscStatsPanel extends React.Component {
         <StatBox name='Initiative' value={getModifier(stats.dexterity)} />
         <StatBox name='Proficiency' value={stats.proficiencyBonus} update={this.update.bind(this, 'proficiencyBonus')} />
         <StatBox name='Speed' value={stats.health} update={this.update.bind(this, 'speed')} />
-        <StatBox name='Perception' value={parseInt(getSkillModifier('perception', this.props.character)) + 10} />
+        <StatBox name='Perception' value={parseInt(getSkillModifier('perception', stats, proficiencies)) + 10} />
       </div>
     )
   }
@@ -35,7 +35,8 @@ class MiscStatsPanel extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    character: state.character
+    stats: state.character.stats,
+    proficiencies: state.character.proficiencies
   }
 }
 

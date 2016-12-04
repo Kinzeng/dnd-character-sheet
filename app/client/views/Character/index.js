@@ -12,8 +12,9 @@ import {get} from '../../utils'
 import {setCharacter, updateCharacter, clearCharacter} from '../../redux/actions/character'
 
 const containerStyle = {
-  display: 'flex',
   padding: '0 1em',
+
+  display: 'flex',
   flexFlow: 'column nowrap',
   justifyContent: 'flex-start',
   alignItems: 'stretch',

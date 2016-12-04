@@ -37,13 +37,13 @@ export function getModifier (stat) {
   return modifier
 }
 
-export function getAbilityModifier (ability, character) {
-  return getModifier(character.stats[ability])
+export function getAbilityModifier (ability, stats) {
+  return getModifier(stats[ability])
 }
 
-export function getSkillModifier (skill, character) {
-  const proficiencyBonus = character.proficiencies[skill] ? character.stats.proficiencyBonus : 0
-  let modifier = parseInt(getAbilityModifier(abilityModifiers[skill], character)) + proficiencyBonus
+export function getSkillModifier (skill, stats, proficiencies) {
+  const proficiencyBonus = proficiencies[skill] ? stats.proficiencyBonus : 0
+  let modifier = parseInt(getAbilityModifier(abilityModifiers[skill], stats)) + proficiencyBonus
   if (modifier >= 0) {
     modifier = `+${modifier}`
   }

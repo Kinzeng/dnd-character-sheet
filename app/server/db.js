@@ -35,6 +35,7 @@ const Character = new mongoose.Schema({
   class: String,
   race: String,
   alignment: String,
+  experience: Number,
   deathSaves: {
     successes: {
       type: [Boolean],

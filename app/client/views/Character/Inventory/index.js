@@ -68,8 +68,8 @@ class Inventory extends React.Component {
   }
 
   render () {
-    const {character} = this.props
-    const items = character.inventory.map((item, i) => {
+    const {inventory} = this.props
+    const items = inventory.map((item, i) => {
       const itemProps = {
         ...item,
         delete: this.props.deleteItem.bind(null, i),
@@ -122,7 +122,7 @@ class Inventory extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    character: state.character
+    inventory: state.character.inventory
   }
 }
 

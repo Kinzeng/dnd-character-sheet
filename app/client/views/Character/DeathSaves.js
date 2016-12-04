@@ -44,8 +44,8 @@ const labelStyle = {
 
 class DeathSaves extends React.Component {
   render () {
-    const {character} = this.props
-    const successes = character.deathSaves.successes.map((save, i) => {
+    const {deathSaves} = this.props
+    const successes = deathSaves.successes.map((save, i) => {
       const checkBoxProps = {
         style: {
           margin: '5px'
@@ -58,7 +58,7 @@ class DeathSaves extends React.Component {
       return <Checkbox {...checkBoxProps} />
     })
 
-    const failures = character.deathSaves.failures.map((save, i) => {
+    const failures = deathSaves.failures.map((save, i) => {
       const checkBoxProps = {
         style: {
           margin: '5px'
@@ -91,7 +91,7 @@ class DeathSaves extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    character: state.character
+    deathSaves: state.character.deathSaves
   }
 }
 

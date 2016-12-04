@@ -1,10 +1,20 @@
 import React from 'react'
+import {withRouter} from 'react-router'
 import {connect} from 'react-redux'
 import TextBox from './TextBox'
 import {updateCharacter} from '../../redux/actions/character'
 
 const containerStyle = {
+  flex: '1 0 auto',
   margin: '2em 0',
+  width: '100%',
+  display: 'flex',
+  flexFlow: 'column nowrap',
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start'
+}
+
+const fieldsStyle = {
   width: '100%',
   display: 'flex',
   flexFlow: 'row nowrap',
@@ -13,64 +23,66 @@ const containerStyle = {
 }
 
 const nameStyle = {
-  margin: 0
+  margin: 0,
+  paddingLeft: 0,
+  borderBottom: 'none',
+  fontSize: '1.5em',
+  fontWeight: 'bold'
 }
 
 const labelStyle = {
-  marginLeft: '0.5em'
+  marginRight: '0.5em'
 }
 
 const textBoxStyle = {
   margin: '0 0.25em'
 }
 
+const levelStyle = {
+  width: '35px',
+  textAlign: 'center',
+  paddingLeft: 0
+}
+
+const experienceStyle = {
+  width: '60px'
+}
+
 class CharacterHeader extends React.Component {
   update (field, value) {
     this.props.updateCharacter({[field]: value})
+    if (field === 'name') {
+      this.props.router.push(`/${value}`)
+    }
+  }
+
+  getTextProps (field, style) {
+    return {
+      style: {
+        ...textBoxStyle,
+        ...style
+      },
+      update: this.update.bind(this, field),
+      value: this.props[field]
+    }
   }
 
   render () {
-    const {character} = this.props
-    const levelProps = {
-      style: {
-        ...textBoxStyle,
-        width: '35px',
-        textAlign: 'center',
-        padding: 0
-      },
-      update: this.update.bind(this, 'level'),
-      value: character.level
-    }
-
-    const classProps = {
-      style: textBoxStyle,
-      update: this.update.bind(this, 'class'),
-      value: character.class
-    }
-
-    const raceProps = {
-      style: textBoxStyle,
-      update: this.update.bind(this, 'race'),
-      value: character.race
-    }
-
-    const alignmentProps = {
-      style: textBoxStyle,
-      update: this.update.bind(this, 'alignment'),
-      value: character.alignment
-    }
-
     return (
       <div style={containerStyle}>
-        <h2 style={nameStyle}>{this.props.character.name}</h2>
-        <span style={labelStyle}>Level:</span>
-        <TextBox {...levelProps} />
-        <span style={labelStyle}>Class:</span>
-        <TextBox {...classProps} />
-        <span style={labelStyle}>Race:</span>
-        <TextBox {...raceProps} />
-        <span style={labelStyle}>Alignment:</span>
-        <TextBox {...alignmentProps} />
+        <TextBox {...this.getTextProps('name', nameStyle)} />
+        <div style={fieldsStyle}>
+          <span style={labelStyle}>Level:</span>
+          <TextBox {...this.getTextProps('level', levelStyle)} />
+          <span style={labelStyle}>Class:</span>
+          <TextBox {...this.getTextProps('class')} />
+          <span style={labelStyle}>Race:</span>
+          <TextBox {...this.getTextProps('race')} />
+          <span style={labelStyle}>Alignment:</span>
+          <TextBox {...this.getTextProps('alignment')} />
+          <span style={labelStyle}>experience:</span>
+          <TextBox {...this.getTextProps('experience', experienceStyle)} />
+        </div>
       </div>
     )
   }
@@ -78,8 +90,13 @@ class CharacterHeader extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    character: state.character
+    name: state.character.name,
+    level: state.character.level,
+    class: state.character.class,
+    race: state.character.race,
+    alignment: state.character.alignment,
+    experience: state.character.experience
   }
 }
 
-export default connect(mapStateToProps, {updateCharacter})(CharacterHeader)
+export default withRouter(connect(mapStateToProps, {updateCharacter})(CharacterHeader))

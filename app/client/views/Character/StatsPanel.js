@@ -26,7 +26,7 @@ class StatsPanel extends React.Component {
   }
 
   render () {
-    const stats = this.props.character.stats
+    const {stats} = this.props
     const boxes = Object.keys(baseStats).map((stat, i) => {
       const props = {
         name: baseStats[stat],
@@ -48,7 +48,7 @@ class StatsPanel extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    character: state.character
+    stats: state.character.stats
   }
 }
 

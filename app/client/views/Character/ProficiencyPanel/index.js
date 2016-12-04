@@ -40,12 +40,12 @@ const sectionTitleStyle = {
 
 class ProficiencyPanel extends React.Component {
   render () {
-    const {character} = this.props
+    const {stats, proficiencies} = this.props
 
     const savingThrows = Object.keys(baseStats).map((stat, i) => {
       const skillProps = {
-        checked: character.proficiencies[stat],
-        modifier: getSkillModifier(stat, character),
+        checked: proficiencies[stat],
+        modifier: getSkillModifier(stat, stats, proficiencies),
         name: baseStats[stat],
         toggleProficiency: this.props.toggleProficiency.bind(null, stat),
         key: i
@@ -56,8 +56,8 @@ class ProficiencyPanel extends React.Component {
 
     const skillComponents = Object.keys(skills).map((skill, i) => {
       const skillProps = {
-        checked: character.proficiencies[skill],
-        modifier: getSkillModifier(skill, character),
+        checked: proficiencies[skill],
+        modifier: getSkillModifier(skill, stats, proficiencies),
         name: skills[skill],
         toggleProficiency: this.props.toggleProficiency.bind(null, skill),
         key: i
@@ -83,7 +83,8 @@ class ProficiencyPanel extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    character: state.character
+    stats: state.character.stats,
+    proficiencies: state.character.proficiencies
   }
 }
 
