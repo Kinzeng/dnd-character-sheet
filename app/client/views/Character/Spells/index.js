@@ -1,7 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import SpellList from './SpellList'
+import SpellStats from './SpellStats'
 import {
+  updateCharacter,
   addSpell,
   updateSpellList,
   updateSpell,
@@ -12,6 +14,15 @@ const containerStyle = {
   maxWidth: '100%',
 
   display: 'flex',
+  flexFlow: 'column nowrap',
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start'
+}
+
+const listsStyle = {
+  maxWidth: '100%',
+
+  display: 'flex',
   flexFlow: 'row wrap',
   justifyContent: 'flex-start',
   alignItems: 'flex-start'
@@ -19,8 +30,17 @@ const containerStyle = {
 
 class Spells extends React.Component {
   render () {
-    const {character} = this.props
-    const spellLists = character.spells.map((spell, i) => {
+    const {spells, spellAbility, stats} = this.props
+
+    const spellStatsProps = {
+      spellAbility,
+      stats,
+      update: (value) => {
+        this.props.updateCharacter({spellAbility: value})
+      }
+    }
+
+    const spellLists = spells.map((spell, i) => {
       const spellProps = {
         spells: spell.spells,
         currentSlots: spell.currentSlots,
@@ -38,7 +58,11 @@ class Spells extends React.Component {
 
     return (
       <div style={containerStyle}>
-        {spellLists}
+        <h3>Spells</h3>
+        <SpellStats {...spellStatsProps} />
+        <div style={listsStyle}>
+          {spellLists}
+        </div>
       </div>
     )
   }
@@ -46,11 +70,14 @@ class Spells extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    character: state.character
+    spells: state.character.spells,
+    spellAbility: state.character.spellAbility,
+    stats: state.character.stats
   }
 }
 
 export default connect(mapStateToProps, {
+  updateCharacter,
   addSpell,
   updateSpellList,
   updateSpell,

@@ -37,7 +37,7 @@ const columnStyle = {
 class Character extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {character: null, error: null}
+    this.state = {error: null}
   }
 
   async componentWillMount () {

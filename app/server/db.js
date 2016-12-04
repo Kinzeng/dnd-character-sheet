@@ -192,6 +192,10 @@ const Character = new mongoose.Schema({
     value: String,
     description: String
   }],
+  spellAbility: {
+    type: String,
+    default: 'intelligence'
+  },
   spells: [
     {
       currentSlots: {
