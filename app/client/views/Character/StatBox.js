@@ -87,7 +87,7 @@ export default class StatBox extends React.Component {
     if (!value) {
       this.setState({[input]: this.state[original]})
     } else {
-      update(this.state[input])
+      update(value)
       this.setState({[original]: value})
     }
   }

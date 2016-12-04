@@ -20,6 +20,14 @@ const Character = new mongoose.Schema({
     type: String,
     default: ''
   },
+  notes: {
+    type: String,
+    default: ''
+  },
+  backstory: {
+    type: String,
+    default: ''
+  },
   level: {
     type: Number,
     default: 1

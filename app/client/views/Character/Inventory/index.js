@@ -4,6 +4,7 @@ import Item from './Item'
 
 const containerStyle = {
   flex: '1 1 auto',
+  margin: '0 10px',
   width: '300px',
   border: '1px solid black',
 

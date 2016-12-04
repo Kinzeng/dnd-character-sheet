@@ -60,6 +60,23 @@ class Character extends React.Component {
     this.props.clearCharacter()
   }
 
+  getTextBoxProps (field, title) {
+    return {
+      style: {
+        minHeight: '200px'
+      },
+      containerStyle: {
+        margin: '0px 10px 30px 10px'
+      },
+      type: 'textarea',
+      value: this.props.character[field],
+      title,
+      update: (value) => {
+        this.props.updateCharacter({[field]: value})
+      }
+    }
+  }
+
   render () {
     if (this.state.error) {
       return <div>404 Not Found</div>
@@ -80,21 +97,6 @@ class Character extends React.Component {
       deleteItem: this.props.deleteItem
     }
 
-    const descriptionProps = {
-      style: {
-        minHeight: '200px'
-      },
-      containerStyle: {
-        margin: '0px 10px 30px 10px'
-      },
-      type: 'textarea',
-      value: character.description,
-      title: 'Description',
-      update: (value) => {
-        this.props.updateCharacter({description: value})
-      }
-    }
-
     return (
       <div style={containerStyle}>
         <CharacterHeader {...componentProps} />
@@ -106,7 +108,9 @@ class Character extends React.Component {
             <ProficiencyPanel {...componentProps} />
           </div>
           <div style={columnStyle}>
-            <TextBox {...descriptionProps} />
+            <TextBox {...this.getTextBoxProps('description', 'Description')} />
+            <TextBox {...this.getTextBoxProps('notes', 'Notes')} />
+            <TextBox {...this.getTextBoxProps('backstory', 'Backstory')} />
           </div>
           <div style={columnStyle}>
             <Inventory {...componentProps} />
