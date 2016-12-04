@@ -1,9 +1,10 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import Form, {FormInput} from '../../../components/Form'
 import Item from './Item'
+import {addItem, deleteItem} from '../../../redux/actions/character'
 
 const containerStyle = {
-  flex: '1 1 auto',
   margin: '0 10px',
   width: '300px',
   border: '1px solid black',
@@ -15,6 +16,7 @@ const containerStyle = {
 }
 
 const titleStyle = {
+  width: '100%',
   backgroundColor: 'black',
   color: 'white',
   textAlign: 'center'
@@ -56,7 +58,7 @@ const textareaStyle = {
   width: '91%'
 }
 
-export default class Inventory extends React.Component {
+class Inventory extends React.Component {
   onSubmit (fields) {
     if (!fields.name || !fields.quantity) {
       throw new Error('Name and quantity cannot be empty')
@@ -117,3 +119,11 @@ export default class Inventory extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    character: state.character
+  }
+}
+
+export default connect(mapStateToProps, {addItem, deleteItem})(Inventory)

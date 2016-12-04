@@ -5,10 +5,11 @@ import DeathSaves from './DeathSaves'
 import Inventory from './Inventory'
 import MiscStatsPanel from './MiscStatsPanel'
 import ProficiencyPanel from './ProficiencyPanel'
+import Spells from './Spells'
 import StatsPanel from './StatsPanel'
 import TextBox from './TextBox'
 import {get} from '../../utils'
-import * as actions from '../../redux/actions/character'
+import {setCharacter, updateCharacter, clearCharacter} from '../../redux/actions/character'
 
 const containerStyle = {
   display: 'flex',
@@ -86,35 +87,23 @@ class Character extends React.Component {
       return <div />
     }
 
-    const {character} = this.props
-    const componentProps = {
-      character,
-      updateCharacter: this.props.updateCharacter,
-      updateStats: this.props.updateStats,
-      toggleProficiency: this.props.toggleProficiency,
-      toggleSave: this.props.toggleSave,
-      addItem: this.props.addItem,
-      deleteItem: this.props.deleteItem
-    }
-
     return (
       <div style={containerStyle}>
-        <CharacterHeader {...componentProps} />
+        <CharacterHeader />
         <div style={characterStyle}>
-          <StatsPanel {...componentProps} />
+          <StatsPanel />
           <div style={columnStyle}>
-            <MiscStatsPanel {...componentProps} />
-            <DeathSaves {...componentProps} />
-            <ProficiencyPanel {...componentProps} />
+            <MiscStatsPanel />
+            <DeathSaves />
+            <ProficiencyPanel />
           </div>
           <div style={columnStyle}>
             <TextBox {...this.getTextBoxProps('description', 'Description')} />
             <TextBox {...this.getTextBoxProps('notes', 'Notes')} />
             <TextBox {...this.getTextBoxProps('backstory', 'Backstory')} />
           </div>
-          <div style={columnStyle}>
-            <Inventory {...componentProps} />
-          </div>
+          <Inventory />
+          <Spells />
         </div>
       </div>
     )
@@ -128,4 +117,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, actions)(Character)
+export default connect(mapStateToProps, {setCharacter, updateCharacter, clearCharacter})(Character)

@@ -1,6 +1,8 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import StatBox from './StatBox'
 import {getModifier, getSkillModifier} from '../../utils'
+import {updateStats} from '../../redux/actions/character'
 
 const containerStyle = {
   width: '444px',
@@ -11,7 +13,7 @@ const containerStyle = {
   alignItems: 'flex-start'
 }
 
-export default class MiscStatsPanel extends React.Component {
+class MiscStatsPanel extends React.Component {
   update (stat, value) {
     this.props.updateStats({[stat]: value})
   }
@@ -30,3 +32,11 @@ export default class MiscStatsPanel extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    character: state.character
+  }
+}
+
+export default connect(mapStateToProps, {updateStats})(MiscStatsPanel)

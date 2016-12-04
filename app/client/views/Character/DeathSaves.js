@@ -1,5 +1,7 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import Checkbox from '../../components/Checkbox'
+import {toggleSave} from '../../redux/actions/character'
 
 const containerStyle = {
   flex: '1 1 auto',
@@ -40,7 +42,7 @@ const labelStyle = {
   textAlign: 'right'
 }
 
-export default class DeathSaves extends React.Component {
+class DeathSaves extends React.Component {
   render () {
     const {character} = this.props
     const successes = character.deathSaves.successes.map((save, i) => {
@@ -86,3 +88,11 @@ export default class DeathSaves extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    character: state.character
+  }
+}
+
+export default connect(mapStateToProps, {toggleSave})(DeathSaves)

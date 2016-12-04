@@ -191,7 +191,24 @@ const Character = new mongoose.Schema({
     weight: Number,
     value: String,
     description: String
-  }]
+  }],
+  spells: [
+    {
+      currentSlots: {
+        type: Number,
+        default: 0
+      },
+      maxSlots: {
+        type: Number,
+        default: 0
+      },
+      spells: [{
+        name: String,
+        prepared: Boolean,
+        description: String
+      }]
+    }
+  ]
 })
 
 const User = new mongoose.Schema({

@@ -1,5 +1,7 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import TextBox from './TextBox'
+import {updateCharacter} from '../../redux/actions/character'
 
 const containerStyle = {
   margin: '2em 0',
@@ -22,7 +24,7 @@ const textBoxStyle = {
   margin: '0 0.25em'
 }
 
-export default class CharacterHeader extends React.Component {
+class CharacterHeader extends React.Component {
   update (field, value) {
     this.props.updateCharacter({[field]: value})
   }
@@ -73,3 +75,11 @@ export default class CharacterHeader extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    character: state.character
+  }
+}
+
+export default connect(mapStateToProps, {updateCharacter})(CharacterHeader)

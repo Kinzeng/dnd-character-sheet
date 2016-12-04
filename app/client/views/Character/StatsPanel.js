@@ -1,6 +1,8 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import StatBox from './StatBox'
 import {getModifier} from '../../utils'
+import {updateStats} from '../../redux/actions/character'
 
 const containerStyle = {
   display: 'flex',
@@ -18,7 +20,7 @@ const baseStats = {
   charisma: 'Charisma'
 }
 
-export default class StatsPanel extends React.Component {
+class StatsPanel extends React.Component {
   update (stat, value) {
     this.props.updateStats({[stat]: value})
   }
@@ -43,3 +45,11 @@ export default class StatsPanel extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    character: state.character
+  }
+}
+
+export default connect(mapStateToProps, {updateStats})(StatsPanel)

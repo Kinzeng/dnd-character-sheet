@@ -94,6 +94,76 @@ export function deleteItem (index) {
   }
 }
 
+export function addSpell (level, spell) {
+  return async (dispatch, getState) => {
+    const state = getState()
+    const spells = state.character.spells
+    spells[level].spells.push({
+      name: spell.name,
+      prepared: false,
+      description: spell.description
+    })
+
+    const character = await put('/api/characters', {
+      ...state.character,
+      spells
+    }, state.user.token)
+
+    await dispatch({type: SET_CHARACTER, character})
+  }
+}
+
+export function updateSpellList (level, spellList) {
+  return async (dispatch, getState) => {
+    const state = getState()
+    const spells = state.character.spells
+    spells[level] = {
+      ...spells[level],
+      ...spellList
+    }
+
+    const character = await put('/api/characters', {
+      ...state.character,
+      spells
+    }, state.user.token)
+
+    await dispatch({type: SET_CHARACTER, character})
+  }
+}
+
+export function updateSpell (level, index, spell) {
+  return async (dispatch, getState) => {
+    const state = getState()
+    const spells = state.character.spells
+    spells[level].spells[index] = {
+      ...spells[level].spells[index],
+      ...spell
+    }
+
+    const character = await put('/api/characters', {
+      ...state.character,
+      spells
+    }, state.user.token)
+
+    await dispatch({type: SET_CHARACTER, character})
+  }
+}
+
+export function deleteSpell (level, index, spell) {
+  return async (dispatch, getState) => {
+    const state = getState()
+    const spells = state.character.spells
+    spells[level].spells.splice(index, 1)
+
+    const character = await put('/api/characters', {
+      ...state.character,
+      spells
+    }, state.user.token)
+
+    await dispatch({type: SET_CHARACTER, character})
+  }
+}
+
 export function clearCharacter () {
   return {type: CLEAR_CHARACTER}
 }

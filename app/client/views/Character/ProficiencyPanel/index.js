@@ -1,7 +1,9 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import Skill from './Skill'
 import {getSkillModifier} from '../../../utils'
 import {baseStats, skills} from '../../../constants'
+import {toggleProficiency} from '../../../redux/actions/character'
 
 const containerStyle = {
   flex: '1 1 auto',
@@ -36,7 +38,7 @@ const sectionTitleStyle = {
   textAlign: 'center'
 }
 
-export default class ProficiencyPanel extends React.Component {
+class ProficiencyPanel extends React.Component {
   render () {
     const {character} = this.props
 
@@ -78,3 +80,11 @@ export default class ProficiencyPanel extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    character: state.character
+  }
+}
+
+export default connect(mapStateToProps, {toggleProficiency})(ProficiencyPanel)
