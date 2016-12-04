@@ -13,8 +13,8 @@ html, body {
 
 .tooltip {
   position: absolute;
-  left: 15%;
-  right: 15%;
+  left: 11.5%;
+  right: 18.5%;
   top: 25px;
   width: 70%;
   padding: 0.5em;

@@ -204,7 +204,10 @@ const Character = new mongoose.Schema({
       },
       spells: [{
         name: String,
-        prepared: Boolean,
+        prepared: {
+          type: Boolean,
+          default: false
+        },
         description: String
       }]
     }

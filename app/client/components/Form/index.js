@@ -61,7 +61,6 @@ export default class Form extends React.Component {
   }
 
   recursiveClone (children) {
-    const self = this
     return React.Children.map(children, (child) => {
       if (!React.isValidElement(child)) {
         return child
@@ -69,13 +68,13 @@ export default class Form extends React.Component {
 
       const props = child.type.name === 'FormInput'
       ? {
-        update: self.update.bind(self, child.props.name),
-        value: self.state[child.props.name] || '',
-        onKeyDown: self.onKeyDown.bind(self)
+        update: this.update.bind(this, child.props.name),
+        value: this.state[child.props.name] || '',
+        onKeyDown: this.onKeyDown.bind(this)
       }
       : {}
 
-      props.children = self.recursiveClone(child.props.children)
+      props.children = this.recursiveClone(child.props.children)
 
       return React.cloneElement(child, props)
     })

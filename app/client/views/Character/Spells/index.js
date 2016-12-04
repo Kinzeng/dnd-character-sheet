@@ -1,10 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import SpellList from './SpellList'
-import {updateSpellList} from '../../../redux/actions/character'
+import {
+  addSpell,
+  updateSpellList,
+  updateSpell,
+  deleteSpell
+} from '../../../redux/actions/character'
 
 const containerStyle = {
-  // flex: '1 1 auto',
   maxWidth: '100%',
 
   display: 'flex',
@@ -16,10 +20,15 @@ const containerStyle = {
 class Spells extends React.Component {
   render () {
     const {character} = this.props
-    const spells = character.spells.map((spell, i) => {
+    const spellLists = character.spells.map((spell, i) => {
       const spellProps = {
-        ...spell,
+        spells: spell.spells,
+        currentSlots: spell.currentSlots,
+        maxSlots: spell.maxSlots,
+        addSpell: this.props.addSpell.bind(null, i),
         updateSpellList: this.props.updateSpellList.bind(null, i),
+        updateSpell: this.props.updateSpell.bind(null, i),
+        deleteSpell: this.props.deleteSpell.bind(null, i),
         level: i,
         key: i
       }
@@ -29,7 +38,7 @@ class Spells extends React.Component {
 
     return (
       <div style={containerStyle}>
-        {spells}
+        {spellLists}
       </div>
     )
   }
@@ -41,4 +50,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {updateSpellList})(Spells)
+export default connect(mapStateToProps, {
+  addSpell,
+  updateSpellList,
+  updateSpell,
+  deleteSpell
+})(Spells)

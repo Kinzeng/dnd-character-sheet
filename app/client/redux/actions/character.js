@@ -94,14 +94,14 @@ export function deleteItem (index) {
   }
 }
 
-export function addSpell (level, spell) {
+export function addSpell (level) {
   return async (dispatch, getState) => {
     const state = getState()
     const spells = state.character.spells
     spells[level].spells.push({
-      name: spell.name,
+      name: 'New Spell',
       prepared: false,
-      description: spell.description
+      description: 'Spell Description'
     })
 
     const character = await put('/api/characters', {
@@ -149,7 +149,7 @@ export function updateSpell (level, index, spell) {
   }
 }
 
-export function deleteSpell (level, index, spell) {
+export function deleteSpell (level, index) {
   return async (dispatch, getState) => {
     const state = getState()
     const spells = state.character.spells

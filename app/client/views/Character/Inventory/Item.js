@@ -56,7 +56,7 @@ export default class Item extends React.Component {
             {description && <div><b>Description:</b> {description}</div>}
           </div>
         }
-        <Button {...buttonProps}>Delete</Button>
+        <Button {...buttonProps}>X</Button>
       </div>
     )
   }

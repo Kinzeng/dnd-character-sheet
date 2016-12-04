@@ -1,15 +1,16 @@
 import React from 'react'
+import Button from '../../../components/Button'
+import Spell from './Spell'
 
 const containerStyle = {
   margin: '0px 10px 30px 10px',
-  height: '300px',
   width: '300px',
   border: '1px solid black',
 
   display: 'flex',
   flexFlow: 'column nowrap',
-  justifyContent: 'flex-start',
-  alignItems: 'center'
+  justifyContent: 'space-between',
+  alignItems: 'stretch'
 }
 
 const titleStyle = {
@@ -42,7 +43,18 @@ const inputStyle = {
   color: 'white'
 }
 
-export default class Spell extends React.Component {
+const listStyle = {
+  flex: '1 1 auto',
+  padding: '1em'
+}
+
+const addStyle = {
+  alignSelf: 'flex-start',
+  fontWeight: 'bold',
+  fontSize: '1.1em'
+}
+
+export default class SpellList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -103,12 +115,32 @@ export default class Spell extends React.Component {
       slots = ''
     }
 
+    const spells = this.props.spells.map((spell, i) => {
+      const spellProps = {
+        ...spell,
+        updateSpell: this.props.updateSpell.bind(null, i),
+        deleteSpell: this.props.deleteSpell.bind(null, i),
+        key: i
+      }
+
+      return <Spell {...spellProps} />
+    })
+
+    const addProps = {
+      style: addStyle,
+      onClick: this.props.addSpell
+    }
+
     return (
       <div style={containerStyle}>
         <div style={titleStyle}>
           {level}
           {slots}
         </div>
+        <div style={listStyle}>
+          {spells}
+        </div>
+        <Button {...addProps}>+</Button>
       </div>
     )
   }
