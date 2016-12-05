@@ -23,6 +23,8 @@ class Register extends React.Component {
     const formProps = {
       method: 'post',
       action: '/auth/register',
+      submitLabel: 'Register',
+      bordered: true,
       afterSubmit: this.login.bind(this)
     }
 

@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router'
 import NavBar from '../../components/NavBar'
 import NewCharacterModal from './NewCharacterModal'
+import {logout} from '../../redux/actions/user'
 import {get} from '../../utils'
 
 const containerStyle = {
@@ -39,9 +40,6 @@ class Dashboard extends React.Component {
   }
 
   async afterSubmit (character) {
-    // this.modal(false)
-    // this.state.characters.push(character)
-    // this.setState({characters: this.state.characters})
     this.props.router.push(`/${character.name}`)
   }
 
@@ -59,6 +57,7 @@ class Dashboard extends React.Component {
     return (
       <div style={containerStyle}>
         <Link to='/'><h1>DnD Character Management</h1></Link>
+        <Link to='/' onClick={this.props.logout}>Logout</Link>
         <div style={mainStyle}>
           <h2>Characters</h2>
           <NavBar openModal={this.modal.bind(this, true)} />
@@ -76,6 +75,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Dashboard)
+export default connect(mapStateToProps, {logout})(Dashboard)
 export CharacterList from './CharacterList'
 export Settings from './Settings'

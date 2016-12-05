@@ -7,11 +7,18 @@ const buttonStyle = {
   cursor: 'pointer'
 }
 
+const borderedStyle = {
+  ...buttonStyle,
+  border: '1px solid black',
+  borderRadius: '10px'
+}
+
 export default class Button extends React.Component {
   render () {
+    const style = this.props.bordered ? borderedStyle : buttonStyle
     const buttonProps = {
       style: {
-        ...buttonStyle,
+        ...style,
         ...this.props.style
       },
       onClick: this.props.onClick
