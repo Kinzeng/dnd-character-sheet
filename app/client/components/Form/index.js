@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from '../Button'
+import FormInput from './FormInput'
 import {get, post} from '../../utils'
 
 const methods = {
@@ -27,7 +28,6 @@ export default class Form extends React.Component {
 
   // called when the input field value is changed
   update (name, e) {
-    console.log(name, e.target.value)
     this.setState({[name]: e.target.value})
   }
 
@@ -67,11 +67,13 @@ export default class Form extends React.Component {
         return child
       }
 
-      const props = {
+      const props = child.type === FormInput
+      ? {
         update: this.update.bind(this, child.props.name),
         value: this.state[child.props.name] || '',
         onKeyDown: this.onKeyDown.bind(this)
       }
+      : {}
 
       props.children = this.recursiveClone(child.props.children)
 
