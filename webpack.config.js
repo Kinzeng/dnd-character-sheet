@@ -3,8 +3,8 @@ var path = require('path')
 var webpack = require('webpack')
 var config = require('./config')
 
-var BUILD_DIR = path.resolve(__dirname, 'app', 'public', 'build')
-var APP_DIR = path.resolve(__dirname, 'app', 'client')
+var BUILD_DIR = path.join(__dirname, 'app', 'public', 'build')
+var APP_DIR = path.join(__dirname, 'app', 'client')
 
 module.exports = {
   stats: {
