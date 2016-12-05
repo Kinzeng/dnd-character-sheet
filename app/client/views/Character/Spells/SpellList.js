@@ -120,6 +120,7 @@ export default class SpellList extends React.Component {
         ...spell,
         updateSpell: this.props.updateSpell.bind(null, i),
         deleteSpell: this.props.deleteSpell.bind(null, i),
+        isCantrip: this.props.level === 0,
         key: i
       }
 

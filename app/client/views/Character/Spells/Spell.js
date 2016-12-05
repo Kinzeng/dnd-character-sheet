@@ -91,7 +91,9 @@ export default class Spell extends React.Component {
     return (
       <div {...containerProps}>
         <div style={spellStyle}>
-          <Checkbox {...checkboxProps} />
+          {!this.props.isCantrip &&
+            <Checkbox {...checkboxProps} />
+          }
           <TextBox {...nameProps} />
           <Button {...deleteProps}>X</Button>
         </div>

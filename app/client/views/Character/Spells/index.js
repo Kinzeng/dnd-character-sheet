@@ -41,7 +41,7 @@ class Spells extends React.Component {
     }
 
     const spellLists = spells.map((spell, i) => {
-      const spellProps = {
+      const spellListProps = {
         spells: spell.spells,
         currentSlots: spell.currentSlots,
         maxSlots: spell.maxSlots,
@@ -53,7 +53,7 @@ class Spells extends React.Component {
         key: i
       }
 
-      return <SpellList {...spellProps} />
+      return <SpellList {...spellListProps} />
     })
 
     return (
