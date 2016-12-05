@@ -193,6 +193,28 @@ const Character = new mongoose.Schema({
     value: String,
     description: String
   }],
+  money: {
+    cp: {
+      type: Number,
+      default: 0
+    },
+    sp: {
+      type: Number,
+      default: 0
+    },
+    gp: {
+      type: Number,
+      default: 0
+    },
+    pp: {
+      type: Number,
+      default: 0
+    },
+    ep: {
+      type: Number,
+      default: 0
+    }
+  },
   spellAbility: {
     type: String,
     default: 'intelligence'

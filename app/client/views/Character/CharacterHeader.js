@@ -45,7 +45,7 @@ const levelStyle = {
 }
 
 const experienceStyle = {
-  width: '60px'
+  width: '70px'
 }
 
 class CharacterHeader extends React.Component {

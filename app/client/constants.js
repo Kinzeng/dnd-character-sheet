@@ -54,3 +54,5 @@ export const abilityModifiers = {
   stealth: 'dexterity',
   survival: 'wisdom'
 }
+
+export const coins = ['cp', 'sp', 'gp', 'pp', 'ep']

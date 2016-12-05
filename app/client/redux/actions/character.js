@@ -94,6 +94,21 @@ export function deleteItem (index) {
   }
 }
 
+export function updateMoney (money) {
+  return async (dispatch, getState) => {
+    const state = getState()
+    const character = await put('/api/characters', {
+      ...state.character,
+      money: {
+        ...state.character.money,
+        ...money
+      }
+    }, state.user.token)
+
+    await dispatch({type: SET_CHARACTER, character})
+  }
+}
+
 export function addSpell (level) {
   return async (dispatch, getState) => {
     const state = getState()
