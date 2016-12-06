@@ -32,7 +32,7 @@ const labelStyle = {
 class Login extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {checked: false}
+    this.state = {checked: true}
   }
 
   componentWillMount () {

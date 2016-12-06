@@ -1,33 +1,54 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router'
-import NavBar from '../../components/NavBar'
+import Button from '../../components/Button'
+import CharacterList from './CharacterList'
 import NewCharacterModal from './NewCharacterModal'
 import {logout} from '../../redux/actions/user'
 import {get} from '../../utils'
 
 const containerStyle = {
   flex: '1 1 auto',
+  overflow: 'hidden',
 
   display: 'flex',
   flexFlow: 'column nowrap',
   justifyContent: 'flex-start',
-  alignItems: 'flex-start'
+  alignItems: 'stretch'
 }
 
-const mainStyle = {
-  alignSelf: 'stretch',
-  flex: '1 1 auto',
+const headerStyle = {
+  paddingLeft: '0.5em'
+}
 
+const linkStyle = {
+  marginRight: '1em',
+  color: 'blue',
+  textDecoration: 'none'
+}
+
+const navStyle = {
   display: 'flex',
-  flexFlow: 'column nowrap',
-  overflow: 'hidden'
+  flexFlow: 'row nowrap',
+  justifyContent: 'flex-start',
+  alignItems: 'center'
+}
+
+const utilStyle = {
+  display: 'flex',
+  flexFlow: 'row nowrap',
+  justifyContent: 'space-between',
+  alignItems: 'center'
+}
+
+const buttonStyle = {
+  marginRight: '1em'
 }
 
 class Dashboard extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {open: false, characters: []}
+    this.state = {open: false, characters: null}
   }
 
   componentWillMount () {
@@ -43,7 +64,7 @@ class Dashboard extends React.Component {
   }
 
   async afterSubmit (character) {
-    this.props.router.push(`/${character.name}`)
+    this.props.router.push(`/characters/${character.name}`)
   }
 
   render () {
@@ -53,20 +74,21 @@ class Dashboard extends React.Component {
       afterSubmit: this.afterSubmit.bind(this)
     }
 
-    const view = React.cloneElement(this.props.children, {
-      characters: this.state.characters
-    })
-
     return (
       <div style={containerStyle}>
-        <Link to='/'><h1>DnD Character Management</h1></Link>
-        <Link to='/' onClick={this.props.logout}>Logout</Link>
-        <div style={mainStyle}>
-          <h2>Dashboard</h2>
-          <NavBar openModal={this.modal.bind(this, true)} />
-          <NewCharacterModal {...newCharacterProps} />
-          {view}
+        <div style={headerStyle}>
+          <h1>DnD Character Management</h1>
+          <div style={navStyle}>
+            <Link style={linkStyle} to='/'>Home</Link>
+            <Link style={linkStyle} to='/' onClick={this.props.logout}>Logout</Link>
+          </div>
+          <div style={utilStyle}>
+            <h2>Characters</h2>
+            <Button style={buttonStyle} bordered onClick={this.modal.bind(this, true)}>+ New Character</Button>
+          </div>
         </div>
+        <NewCharacterModal {...newCharacterProps} />
+        <CharacterList characters={this.state.characters} />
       </div>
     )
   }
@@ -79,5 +101,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {logout})(Dashboard)
-export CharacterList from './CharacterList'
-export Settings from './Settings'

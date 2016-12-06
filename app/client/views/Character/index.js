@@ -18,23 +18,8 @@ const containerStyle = {
   display: 'flex',
   flexFlow: 'column nowrap',
   justifyContent: 'flex-start',
-  alignItems: 'stretch',
-  overflow: 'scroll'
+  alignItems: 'stretch'
 }
-
-// const backgroundProps = {
-//   style: {
-//     position: 'absolute',
-//     top: 0,
-//     right: 0,
-//     bottom: 0,
-//     left: 0,
-//     minHeight: '100%',
-//     minWidth: '100%',
-//     zIndex: -1
-//   },
-//   src: '/media/background.jpg'
-// }
 
 const characterStyle = {
   display: 'flex',

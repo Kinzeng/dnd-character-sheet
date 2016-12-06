@@ -2,29 +2,46 @@ import React from 'react'
 import {Link} from 'react-router'
 
 const containerStyle = {
-  padding: '1em',
-  height: '2em',
+  margin: '0.5em',
+  padding: '0.5em',
+  height: '150px',
+  width: '125px',
+  color: 'black',
   border: '1px solid black',
-  borderWidth: '1px 0',
-  color: 'white',
   textDecoration: 'none',
-  backgroundColor: 'rgb(63, 133, 151)',
 
   display: 'flex',
-  flexFlow: 'row nowrap',
-  justifyContent: 'space-around'
+  flexFlow: 'column nowrap',
+  justifyContent: 'space-between',
+  alignItems: 'center'
+}
+
+const textStyle = {
+  textAlign: 'center'
+}
+
+const descriptionStyle = {
+  display: 'flex',
+  flexFlow: 'column nowrap',
+  justifyContent: 'center',
+  alignItems: 'stretch'
 }
 
 export default class CharacterListItem extends React.Component {
   render () {
     const containerProps = {
       style: containerStyle,
-      to: `/${this.props.name}`
+      to: `/characters/${this.props.name}`
     }
 
     return (
       <Link {...containerProps}>
-        <span>{this.props.name}</span>
+        <div style={textStyle}>{this.props.name}</div>
+        <div style={descriptionStyle}>
+          <div style={textStyle}>Level {this.props.level}</div>
+          <div style={textStyle}>{this.props.race}</div>
+          <div style={textStyle}>{this.props.class}</div>
+        </div>
       </Link>
     )
   }

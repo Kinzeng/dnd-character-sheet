@@ -25,6 +25,7 @@ const fieldsStyle = {
 const nameStyle = {
   margin: 0,
   paddingLeft: 0,
+  width: '100%',
   borderBottom: 'none',
   fontSize: '1.5em',
   fontWeight: 'bold'
@@ -52,7 +53,7 @@ class CharacterHeader extends React.Component {
   update (field, value) {
     this.props.updateCharacter({[field]: value})
     if (field === 'name') {
-      this.props.router.push(`/${value}`)
+      this.props.router.push(`/characters/${value}`)
     }
   }
 
