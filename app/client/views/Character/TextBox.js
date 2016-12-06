@@ -10,7 +10,8 @@ const inputStyle = {
   fontSize: '1em',
   border: 'none',
   borderBottom: '1px solid black',
-  outline: 'none'
+  outline: 'none',
+  backgroundColor: 'transparent'
 }
 
 const textareaStyle = {
@@ -19,7 +20,8 @@ const textareaStyle = {
   fontSize: '1em',
   border: '1px solid black',
   outline: 'none',
-  resize: 'none'
+  resize: 'none',
+  backgroundColor: 'transparent'
 }
 
 const titleStyle = {

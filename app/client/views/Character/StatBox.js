@@ -43,6 +43,7 @@ const valueStyle = {
   border: 'none',
   borderRadius: '10px',
   outline: 'none',
+  backgroundColor: 'transparent',
 
   display: 'flex',
   flexFlow: 'column nowrap',

@@ -12,6 +12,7 @@ import {get} from '../../utils'
 import {setCharacter, updateCharacter, clearCharacter} from '../../redux/actions/character'
 
 const containerStyle = {
+  position: 'relative',
   padding: '0 1em',
 
   display: 'flex',
@@ -20,6 +21,20 @@ const containerStyle = {
   alignItems: 'stretch',
   overflow: 'scroll'
 }
+
+// const backgroundProps = {
+//   style: {
+//     position: 'absolute',
+//     top: 0,
+//     right: 0,
+//     bottom: 0,
+//     left: 0,
+//     minHeight: '100%',
+//     minWidth: '100%',
+//     zIndex: -1
+//   },
+//   src: '/media/background.jpg'
+// }
 
 const characterStyle = {
   display: 'flex',
@@ -90,6 +105,7 @@ class Character extends React.Component {
 
     return (
       <div style={containerStyle}>
+        {/* <img {...backgroundProps} /> */}
         <CharacterHeader />
         <div style={characterStyle}>
           <StatsPanel />

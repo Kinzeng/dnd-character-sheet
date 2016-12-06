@@ -10,10 +10,13 @@ const containerStyle = {
   flex: '1 1 auto',
 
   display: 'flex',
-  flexFlow: 'column nowrap'
+  flexFlow: 'column nowrap',
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start'
 }
 
 const mainStyle = {
+  alignSelf: 'stretch',
   flex: '1 1 auto',
 
   display: 'flex',
@@ -59,7 +62,7 @@ class Dashboard extends React.Component {
         <Link to='/'><h1>DnD Character Management</h1></Link>
         <Link to='/' onClick={this.props.logout}>Logout</Link>
         <div style={mainStyle}>
-          <h2>Characters</h2>
+          <h2>Dashboard</h2>
           <NavBar openModal={this.modal.bind(this, true)} />
           <NewCharacterModal {...newCharacterProps} />
           {view}
