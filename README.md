@@ -28,3 +28,5 @@ Character Sheet
   * Webpack is a module bundler that helps to build client side code into one or more bundles of code. It allows the use of require (or ES6 import) in client side code for a more organized development process, as well as several other useful features like ES6 transpiling and also linting.
 * Redux- 6 points
   * Redux is a global state management library (similar to Flux) that helps with React implementation because of how information is mostly passed from parent to child in React. There is a global "store", which is essentially just a Javascript object, and react-redux provides a good interface to access this store from the components. Redux is a very minimalist library (2kB including dependencies), so a lot of the implementation will be left to me, which is why I am listing it as 6 points.
+* React-Router- 4 points
+  * React-Router is a library that handles client side routing using the browser's history API with declarative React components. With the Route components, I pass in the path and the component to render as props. In app/client/routes/index.js I declare all of the routes and the components to render.

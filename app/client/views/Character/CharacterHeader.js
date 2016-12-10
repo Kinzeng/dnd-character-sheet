@@ -53,7 +53,7 @@ class CharacterHeader extends React.Component {
   update (field, value) {
     this.props.updateCharacter({[field]: value})
     if (field === 'name') {
-      this.props.router.push(`/characters/${value}`)
+      this.props.router.replace(`/characters/${value}`)
     }
   }
 
