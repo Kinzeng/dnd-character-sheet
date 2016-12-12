@@ -61,6 +61,7 @@ export default class Form extends React.Component {
     }
   }
 
+  // recursive function based on: https://gist.github.com/dandelany/1ff06f4fa1f8d6f89c5e
   recursiveClone (children) {
     return React.Children.map(children, (child) => {
       if (!React.isValidElement(child)) {

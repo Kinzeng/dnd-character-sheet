@@ -10,6 +10,7 @@ html, body {
   align-items: stretch;
 }
 
+/* tooltip box created using: http://www.cssarrowplease.com */
 .tooltip {
   position: absolute;
   left: 11.5%;
