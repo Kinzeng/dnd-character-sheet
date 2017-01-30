@@ -81,7 +81,7 @@ class CharacterHeader extends React.Component {
           <TextBox {...this.getTextProps('race')} />
           <span style={labelStyle}>Alignment:</span>
           <TextBox {...this.getTextProps('alignment')} />
-          <span style={labelStyle}>experience:</span>
+          <span style={labelStyle}>Experience:</span>
           <TextBox {...this.getTextProps('experience', experienceStyle)} />
         </div>
       </div>

@@ -8,6 +8,7 @@
     "forever": "export NODE_ENV=production; ~/usr/local/lib/node_modules/.bin/forever start -o ~/var/log/app.log -e ~/var/log/app_error.log -c './node_modules/.bin/babel-node' ./app/server/index.js ",
     "stop-forever": "~/usr/local/lib/node_modules/.bin/forever stopall",
     "babel-node": "babel-node --presets=es2015,react,stage-0 --ignore node_modules",
+    "mongo": "mongod",
     "monitor": "nodemon --ignore app/public/ --ignore app/client/ --exec npm run babel-node -- app/server",
     "dev": "webpack -d --watch --progress & npm run monitor",
     "build": "NODE_ENV=production webpack -p",

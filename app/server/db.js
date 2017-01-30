@@ -4,7 +4,8 @@ import config from '../../config'
 
 const {username, password, host, port, db} = config.mongo
 mongoose.Promise = Promise
-mongoose.connect(`mongodb://${username}:${password}@${host}:${port}/${db}`)
+const auth = username ? `${username}:${password}@` : ''
+mongoose.connect(`mongodb://${auth}${host}:${port}/${db}`)
 
 const Character = new mongoose.Schema({
   owner: {
